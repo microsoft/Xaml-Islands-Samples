@@ -1,0 +1,8 @@
+namespace MyApp
+{
+    [default_interface]
+    runtimeclass MediaPlayerControl : Windows.UI.Xaml.Controls.UserControl
+    {
+        MediaPlayerControl();
+    }
+}

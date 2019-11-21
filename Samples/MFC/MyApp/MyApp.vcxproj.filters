@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="App.cpp" />
+    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="App.base.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Images\LockScreenLogo.scale-200.png">
+      <Filter>Images</Filter>
+    </Image>
+    <Image Include="Images\SplashScreen.scale-200.png">
+      <Filter>Images</Filter>
+    </Image>
+    <Image Include="Images\Square44x44Logo.scale-200.png">
+      <Filter>Images</Filter>
+    </Image>
+    <Image Include="Images\Square44x44Logo.targetsize-24_altform-unplated.png">
+      <Filter>Images</Filter>
+    </Image>
+    <Image Include="Images\Square150x150Logo.scale-200.png">
+      <Filter>Images</Filter>
+    </Image>
+    <Image Include="Images\StoreLogo.png">
+      <Filter>Images</Filter>
+    </Image>
+    <Image Include="Images\Wide310x150Logo.scale-200.png">
+      <Filter>Images</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MyApp_TemporaryKey.pfx" />
+    <None Include="packages.config" />
+    <None Include="dummy.exe" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Images">
+      <UniqueIdentifier>{e48dc53e-40b1-40cb-970a-f89935452892}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="TreeViewHostUserControl.xaml" />
+    <Page Include="Display3DUserControl.xaml" />
+    <Page Include="MediaPlayerControl.xaml" />
+    <Page Include="ImagePreviewerUserControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="TreeViewNodeViewModel.idl" />
+    <Midl Include="FilePathToBitmapImageConverter.idl" />
+  </ItemGroup>
+</Project>

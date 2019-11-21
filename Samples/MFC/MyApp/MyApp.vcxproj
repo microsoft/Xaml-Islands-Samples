@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.Windows.CppWinRT.2.0.191111.2\build\native\Microsoft.Windows.CppWinRT.props" Condition="Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.191111.2\build\native\Microsoft.Windows.CppWinRT.props')" />
+  <Import Project="..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.0.0\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.props" Condition="Exists('..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.0.0\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.props')" />
+  <Import Project="..\packages\SceneLoaderComponent.1.0.0.1\build\native\SceneLoaderComponent.props" Condition="Exists('..\packages\SceneLoaderComponent.1.0.0.1\build\native\SceneLoaderComponent.props')" />
+  <PropertyGroup Label="Globals">
+    <CppWinRTEnabled>true</CppWinRTEnabled>
+    <MinimalCoreWin>true</MinimalCoreWin>
+    <ProjectGuid>{c4b7649d-c389-4f2c-b0b8-b55a08c8133f}</ProjectGuid>
+    <ProjectName>MyApp</ProjectName>
+    <RootNamespace>MyApp</RootNamespace>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <MinimumVisualStudioVersion>15.0</MinimumVisualStudioVersion>
+    <AppContainerApplication>true</AppContainerApplication>
+    <ApplicationType>Windows Store</ApplicationType>
+    <ApplicationTypeRevision>10.0</ApplicationTypeRevision>
+    <WindowsTargetPlatformVersion Condition=" '$(WindowsTargetPlatformVersion)' == '' ">10.0.18362.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformMinVersion>10.0.18362.0</WindowsTargetPlatformMinVersion>
+  </PropertyGroup>
+  <PropertyGroup Label="Globals">
+    <WindowsAppContainer>true</WindowsAppContainer>
+    <AppxGeneratePriEnabled>true</AppxGeneratePriEnabled>
+    <ProjectPriIndexName>App</ProjectPriIndexName>
+    <AppxPackage>true</AppxPackage>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '15.0'">v141</PlatformToolset>
+    <PlatformToolset Condition="'$(VisualStudioVersion)' == '16.0'">v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'" Label="Configuration">
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Release'" Label="Configuration">
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <Import Project="..\Solution.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\packages\Microsoft.VCRTForwarders.140.1.0.2-rc\build\native\Microsoft.VCRTForwarders.140.targets" Condition="Exists('..\packages\Microsoft.VCRTForwarders.140.1.0.2-rc\build\native\Microsoft.VCRTForwarders.140.targets')" />
+    <Import Project="..\packages\SceneLoaderComponent.1.0.0.1\build\native\SceneLoaderComponent.targets" Condition="Exists('..\packages\SceneLoaderComponent.1.0.0.1\build\native\SceneLoaderComponent.targets')" />
+    <Import Project="..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.0.0\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.targets" Condition="Exists('..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.0.0\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.targets')" />
+    <Import Project="..\packages\Microsoft.UI.Xaml.2.3.191107001-prerelease\build\native\Microsoft.UI.Xaml.targets" Condition="Exists('..\packages\Microsoft.UI.Xaml.2.3.191107001-prerelease\build\native\Microsoft.UI.Xaml.targets')" />
+    <Import Project="..\packages\Microsoft.Windows.CppWinRT.2.0.191111.2\build\native\Microsoft.Windows.CppWinRT.targets" Condition="Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.191111.2\build\native\Microsoft.Windows.CppWinRT.targets')" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <PackageCertificateThumbprint>1275408ED7490E88907AB01680F7B0655BDB12E6</PackageCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)pch.pch</PrecompiledHeaderOutputFile>
+      <WarningLevel>Level4</WarningLevel>
+      <AdditionalOptions>%(AdditionalOptions) /bigobj</AdditionalOptions>
+      <DisableSpecificWarnings>4453;28204</DisableSpecificWarnings>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='Debug'">
+    <ClCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir);$(GeneratedFilesDir);$(IntDir);%(AppIncludeDirectories);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir);$(GeneratedFilesDir);$(IntDir);%(AppIncludeDirectories);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Midl>
+      <MetadataFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)Unmerged\%(Filename).winmd</MetadataFileName>
+    </Midl>
+    <Midl>
+      <MetadataFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)Unmerged\%(Filename).winmd</MetadataFileName>
+    </Midl>
+    <Link>
+      <OutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)\$(TargetName)$(TargetExt)</OutputFile>
+    </Link>
+    <Link>
+      <OutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)\$(TargetName)$(TargetExt)</OutputFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='Release'">
+    <ClCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir);$(GeneratedFilesDir);$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir);$(GeneratedFilesDir);$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Midl>
+      <MetadataFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)Unmerged\%(Filename).winmd</MetadataFileName>
+    </Midl>
+    <Midl>
+      <MetadataFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)Unmerged\%(Filename).winmd</MetadataFileName>
+    </Midl>
+    <Link>
+      <OutputFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)\$(TargetName)$(TargetExt)</OutputFile>
+    </Link>
+    <Link>
+      <OutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)\$(TargetName)$(TargetExt)</OutputFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="App.base.h" />
+    <ClInclude Include="App.h">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
+    <ClInclude Include="Display3DUserControl.h">
+      <DependentUpon>Display3DUserControl.xaml</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="FilePathToBitmapImageConverter.h">
+      <DependentUpon>FilePathToBitmapImageConverter.idl</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
+    <ClInclude Include="ImagePreviewerUserControl.h">
+      <DependentUpon>ImagePreviewerUserControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
+    <ClInclude Include="MediaPlayerControl.h">
+      <DependentUpon>MediaPlayerControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="TreeViewHostUserControl.h">
+      <DependentUpon>TreeViewHostUserControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
+    <ClInclude Include="TreeViewNodeViewModel.h">
+      <DependentUpon>TreeViewNodeViewModel.idl</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+    <None Include="dummy.exe">
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
+    </None>
+    <None Include="MyApp_TemporaryKey.pfx" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Images\LockScreenLogo.scale-200.png" />
+    <Image Include="Images\SplashScreen.scale-200.png" />
+    <Image Include="Images\Square150x150Logo.scale-200.png" />
+    <Image Include="Images\Square44x44Logo.scale-200.png" />
+    <Image Include="Images\Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Image Include="Images\StoreLogo.png" />
+    <Image Include="Images\Wide310x150Logo.scale-200.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="App.cpp">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
+    <ClCompile Include="Display3DUserControl.cpp">
+      <DependentUpon>Display3DUserControl.xaml</DependentUpon>
+    </ClCompile>
+    <ClCompile Include="FilePathToBitmapImageConverter.cpp">
+      <DependentUpon>FilePathToBitmapImageConverter.idl</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
+    <ClCompile Include="ImagePreviewerUserControl.cpp">
+      <DependentUpon>ImagePreviewerUserControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
+    <ClCompile Include="MediaPlayerControl.cpp">
+      <DependentUpon>MediaPlayerControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+    <ClCompile Include="TreeViewHostUserControl.cpp">
+      <DependentUpon>TreeViewHostUserControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
+    <ClCompile Include="TreeViewNodeViewModel.cpp">
+      <DependentUpon>TreeViewNodeViewModel.idl</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="App.idl">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Midl>
+    <Midl Include="Display3DuserControl.idl">
+      <DependentUpon>Display3DUserControl.xaml</DependentUpon>
+    </Midl>
+    <Midl Include="FilePathToBitmapImageConverter.idl">
+      <SubType>Designer</SubType>
+    </Midl>
+    <Midl Include="ImagePreviewerUserControl.idl">
+      <DependentUpon>ImagePreviewerUserControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Midl>
+    <Midl Include="MediaPlayerControl.idl">
+      <DependentUpon>MediaPlayerControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Midl>
+    <Midl Include="TreeViewHostUserControl.idl">
+      <DependentUpon>TreeViewHostUserControl.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Midl>
+    <Midl Include="TreeViewNodeViewModel.idl">
+      <SubType>Designer</SubType>
+    </Midl>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Display3DUserControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ImagePreviewerUserControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MediaPlayerControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TreeViewHostUserControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <PropertyGroup Label="Globals">
+    <WindowsAppContainer>true</WindowsAppContainer>
+    <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
+    <PackageCertificateKeyFile>MyApp_TemporaryKey.pfx</PackageCertificateKeyFile>
+  </PropertyGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.VCRTForwarders.140.1.0.2-rc\build\native\Microsoft.VCRTForwarders.140.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.VCRTForwarders.140.1.0.2-rc\build\native\Microsoft.VCRTForwarders.140.targets'))" />
+    <Error Condition="!Exists('..\packages\SceneLoaderComponent.1.0.0.1\build\native\SceneLoaderComponent.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SceneLoaderComponent.1.0.0.1\build\native\SceneLoaderComponent.props'))" />
+    <Error Condition="!Exists('..\packages\SceneLoaderComponent.1.0.0.1\build\native\SceneLoaderComponent.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SceneLoaderComponent.1.0.0.1\build\native\SceneLoaderComponent.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.0.0\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.0.0\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.0.0\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.0.0\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.UI.Xaml.2.3.191107001-prerelease\build\native\Microsoft.UI.Xaml.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.UI.Xaml.2.3.191107001-prerelease\build\native\Microsoft.UI.Xaml.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.191111.2\build\native\Microsoft.Windows.CppWinRT.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Windows.CppWinRT.2.0.191111.2\build\native\Microsoft.Windows.CppWinRT.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.191111.2\build\native\Microsoft.Windows.CppWinRT.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Windows.CppWinRT.2.0.191111.2\build\native\Microsoft.Windows.CppWinRT.targets'))" />
+  </Target>
+</Project>
