@@ -36,7 +36,6 @@
     <AppxManifest Include="Package.appxmanifest" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="MyApp_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="dummy.exe" />
   </ItemGroup>
