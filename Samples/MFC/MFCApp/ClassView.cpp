@@ -102,17 +102,11 @@ int CClassView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	if (CDockablePane::OnCreate(lpCreateStruct) == -1)
 		return -1;
 
-	_desktopWindowXamlSource = DesktopWindowXamlSource{};
-	auto interop = _desktopWindowXamlSource.as<IDesktopWindowXamlSourceNative>();
-	check_hresult(interop->AttachToWindow(GetSafeHwnd()));
-
-	HWND xamlHostHwnd = NULL;
-	check_hresult(interop->get_WindowHandle(&xamlHostHwnd));
-
-	_treeView = TreeViewHostUserControl{};
-	createNodes(_treeView);
-	_treeView.TreeViewNodeSelected({ this, &CClassView::TreeViewodeSelectedHandler });
-	_desktopWindowXamlSource.Content(_treeView);
+	m_treeViewHost.Create(this);
+	m_treeView = TreeViewHostUserControl{};
+	createNodes(m_treeView);
+	m_treeView.TreeViewNodeSelected({ this, &CClassView::TreeViewodeSelectedHandler });
+	m_treeViewHost.Content(m_treeView);
 
 	AdjustLayout();
 	return 0;
@@ -126,10 +120,7 @@ void CClassView::OnSize(UINT nType, int cx, int cy)
 
 void CClassView::AdjustLayout()
 {
-	auto interop = _desktopWindowXamlSource.as<IDesktopWindowXamlSourceNative>();
-	HWND xamlHostHwnd = NULL;
-	check_hresult(interop->get_WindowHandle(&xamlHostHwnd));
-
+	HWND xamlHostHwnd = m_treeViewHost.GetSafeHwnd();
 	RECT windowRect;
 	GetWindowRect(&windowRect);
 	::SetWindowPos(xamlHostHwnd, NULL, 0, 0, windowRect.right - windowRect.left, windowRect.bottom - windowRect.top, SWP_SHOWWINDOW);
@@ -148,10 +139,6 @@ void CClassView::OnPaint()
 
 void CClassView::OnClose()
 {
-	_treeView = nullptr;
-	_desktopWindowXamlSource.Close();
-	_desktopWindowXamlSource = nullptr;
-
 	CDockablePane::OnClose();
 }
 

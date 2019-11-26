@@ -3,6 +3,8 @@
 
 #include "ViewTree.h"
 
+#include "WindowsDesktopHost.h"
+
 class CClassView : public CDockablePane
 {
 public:
@@ -13,8 +15,8 @@ public:
 	void TreeViewodeSelectedHandler(winrt::Windows::Foundation::IInspectable const& sender, winrt::MyApp::TreeViewNodeViewModel const& args);
 
 private:
-	winrt::Windows::UI::Xaml::Hosting::DesktopWindowXamlSource _desktopWindowXamlSource{ nullptr };
-	winrt::MyApp::TreeViewHostUserControl _treeView{ nullptr };
+	CWindowsDesktopHost m_treeViewHost;
+	winrt::MyApp::TreeViewHostUserControl m_treeView{ nullptr };
 	
 protected:
 

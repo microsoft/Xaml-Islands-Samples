@@ -2,7 +2,7 @@
 //
 
 #include "pch.h"
-#include "ChromeTester.h"
+
 #include "WindowsDesktopHost.h"
 
 IMPLEMENT_DYNAMIC(CWindowsDesktopHost, CBasePane)
@@ -13,6 +13,8 @@ CWindowsDesktopHost::CWindowsDesktopHost()
 
 CWindowsDesktopHost::~CWindowsDesktopHost()
 {
+    m_xamlIsland.Content(nullptr);
+    m_xamlIsland.Close();
 }
 
 BEGIN_MESSAGE_MAP(CWindowsDesktopHost, CBasePane)
