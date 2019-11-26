@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
+  <Identity
+    Name="7a5a8cec-bff4-48c7-963b-1dd57a7b0ff5"
+    Publisher="CN=k_ota2"
+    Version="1.0.0.0" />
+  <mp:PhoneIdentity PhoneProductId="7a5a8cec-bff4-48c7-963b-1dd57a7b0ff5" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <Properties>
+    <DisplayName>App</DisplayName>
+    <PublisherDisplayName>internal</PublisherDisplayName>
+    <Logo>Images\StoreLogo.png</Logo>
+  </Properties>
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
+  </Dependencies>
+  <Resources>
+    <Resource Language="x-generate" />
+  </Resources>
+  <Applications>
+    <Application Id="App" Executable="dummy.exe" EntryPoint="MyApp.App">
+      <uap:VisualElements DisplayName="App" Description="Project for a single page C++/WinRT Universal Windows Platform (UWP) app with no predefined layout"
+        Square150x150Logo="Images\Square150x150Logo.png" Square44x44Logo="Images\Square44x44Logo.png" BackgroundColor="transparent">
+        <uap:DefaultTile/>
+      </uap:VisualElements>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <Capability Name="internetClient" />
+    <uap:Capability Name="picturesLibrary"/>
+  </Capabilities>
+</Package>

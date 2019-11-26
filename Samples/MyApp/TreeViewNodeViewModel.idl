@@ -1,0 +1,16 @@
+namespace MyApp
+{
+	[bindable]
+    [default_interface]
+    runtimeclass TreeViewNodeViewModel 
+    {
+		TreeViewNodeViewModel();
+		TreeViewNodeViewModel(String label, Windows.Foundation.Uri icon, String imagePath);
+		String Label;
+		Windows.Foundation.Uri Icon;
+		String ImagePath;
+		String Memo;
+
+		Windows.Foundation.Collections.IObservableVector<TreeViewNodeViewModel> Children{ get; };
+	}
+}
