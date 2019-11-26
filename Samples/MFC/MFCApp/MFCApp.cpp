@@ -74,7 +74,6 @@ BOOL CMFCAppApp::InitInstance()
 
 	CWinAppEx::InitInstance();
 
-
 	// Initialize OLE libraries
 	if (!AfxOleInit())
 	{
@@ -85,6 +84,8 @@ BOOL CMFCAppApp::InitInstance()
 	AfxEnableControlContainer();
 
 	EnableTaskbarInteraction();
+
+	hostApp = winrt::MyApp::App{};
 
 	// AfxInitRichEdit2() is required to use RichEdit control
 	// AfxInitRichEdit2();
@@ -120,9 +121,6 @@ BOOL CMFCAppApp::InitInstance()
 	if (!pDocTemplate)
 		return FALSE;
 	AddDocTemplate(pDocTemplate);
-
-	winrt::init_apartment(winrt::apartment_type::single_threaded);
-	hostApp = winrt::MyApp::App{};
 
 	// create main MDI Frame window
 	CMainFrame* pMainFrame = new CMainFrame;
