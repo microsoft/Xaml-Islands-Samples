@@ -218,9 +218,6 @@
     <Manifest Include="app.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <AppxManifest Include="$(SolutionDir)\bin\$(Platform)\$(Configuration)\$(AppProjectName)\AppxManifest.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <Media Include="Assets\world.mp4">
       <Filter>Assets</Filter>
     </Media>
