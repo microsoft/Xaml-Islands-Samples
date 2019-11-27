@@ -317,7 +317,7 @@
     <AppIncludeDirectories>$(SolutionDir)\obj\$(Platform)\$(Configuration)\$(AppProjectName)\;$(SolutionDir)\obj\$(Platform)\$(Configuration)\$(AppProjectName)\Generated Files\;</AppIncludeDirectories>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\MyApp\MyApp.vcxproj" />
+    <ProjectReference Include="..\..\Native\MyApp\MyApp.vcxproj" />
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="app.manifest" />

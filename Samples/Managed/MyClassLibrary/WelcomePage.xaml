@@ -1,0 +1,21 @@
+﻿<UserControl
+    x:Class="MyClassLibrary.WelcomePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MyClassLibrary"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:winui="using:Microsoft.UI.Xaml.Controls"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" Spacing="10" Padding="20" VerticalAlignment="Center">
+            <TextBlock x:Uid="WelcomeHeader" x:Name="HeaderTB" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Hello from Xaml Islands" FontSize="30" />
+            <TextBlock HorizontalAlignment="Center" Margin="15" TextWrapping="Wrap" Text="😍❤💋🌹🎉😎�🐱‍👤" FontSize="16" />
+            <TextBlock x:Name="WelcomeDescriptionTB" HorizontalAlignment="Center" TextWrapping="WrapWholeWords" Margin="10" Text="This is a sample" FontSize="16" />
+            <winui:RatingControl />
+        </StackPanel>
+    </Grid>
+</UserControl>

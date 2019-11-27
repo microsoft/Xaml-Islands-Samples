@@ -1,0 +1,27 @@
+﻿<UserControl
+    x:Class="SampleUserControl.MyUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SampleUserControl"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <TextBox x:Name="Text1" Text="Text"></TextBox>
+        <Button x:Name="Button1" Click="Button_Click">Button 1</Button>
+        <Button x:Name="GotoLine" Click="Button_Click" Content="GotoLine">
+            <Button.KeyboardAccelerators>
+                <KeyboardAccelerator Key="G" Modifiers="Control" />
+            </Button.KeyboardAccelerators>
+        </Button>
+        <Button x:Name="Button3" Click="Button_Click">Button 3</Button>
+        <local:InternalUserControl x:Name="internalUserControl" />
+        <ComboBox x:Name="comboBox" SelectedIndex="1">
+            <ComboBoxItem Content="Item1"/>
+            <ComboBoxItem Content="Item2"/>
+            <ComboBoxItem Content="Item3"/>
+        </ComboBox>
+    </StackPanel>
+</UserControl>

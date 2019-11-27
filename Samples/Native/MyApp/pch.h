@@ -32,3 +32,8 @@
 #include <winrt/Microsoft.UI.Xaml.XamlTypeInfo.h>
 
 #include <winrt/SceneLoaderComponent.h>
+
+#include <winrt/SampleUserControl.h>
+#include <winrt/SampleLibraryCS.h>
+#include <winrt/SampleLibraryCS.SampleLibraryCS_XamlTypeInfo.h>
+
