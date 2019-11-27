@@ -35,3 +35,5 @@
 
 #include <winrt/SampleUserControl.h>
 #include <winrt/SampleLibraryCS.h>
+#include <winrt/SampleLibraryCS.SampleLibraryCS_XamlTypeInfo.h>
+
