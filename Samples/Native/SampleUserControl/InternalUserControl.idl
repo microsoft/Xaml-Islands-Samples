@@ -1,0 +1,9 @@
+namespace SampleUserControl
+{
+    [default_interface]
+    runtimeclass InternalUserControl : Windows.UI.Xaml.Controls.UserControl
+    {
+        InternalUserControl();
+        Int32 MyProperty;
+    }
+}

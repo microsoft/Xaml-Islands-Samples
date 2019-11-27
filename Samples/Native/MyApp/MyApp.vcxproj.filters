@@ -52,6 +52,7 @@
     <Page Include="Display3DUserControl.xaml" />
     <Page Include="MediaPlayerControl.xaml" />
     <Page Include="ImagePreviewerUserControl.xaml" />
+    <Page Include="MainUserControl.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Midl Include="TreeViewNodeViewModel.idl" />
