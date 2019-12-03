@@ -280,13 +280,13 @@
       <IsWinMDFile>true</IsWinMDFile>
     </Reference>
     <Reference Include="SampleLibraryCS.winmd">
-      <HintPath>F:\Repos\Xaml-Islands-Samples\Samples\Managed\SampleLibraryCS\bin\x64\Release\SampleLibraryCS.winmd</HintPath>
+      <HintPath>..\..\Managed\SampleLibraryCS\bin\x64\$(Configuration)\SampleLibraryCS.winmd</HintPath>
       <IsWinMDFile>true</IsWinMDFile>
     </Reference>
+    <!-- HACK END -->
     <ProjectReference Include="..\..\Managed\SampleLibraryCS\SampleLibraryCS.csproj">
       <Project>{92a2ac96-b414-455e-afe3-a6872591db93}</Project>
     </ProjectReference>
-    <!-- HACK END -->
     <ProjectReference Include="..\SampleUserControl\SampleUserControl.vcxproj">
       <Project>{b6b66dba-c720-4407-b490-6ae3fc2870fc}</Project>
     </ProjectReference>
