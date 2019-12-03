@@ -3,6 +3,7 @@
     xmlns="urn:schemas-microsoft-com:asm.v1"
     xmlns:asmv3="urn:schemas-microsoft-com:asm.v3"
     manifestVersion="1.0">
+  <assemblyIdentity version="1.0.0.0" processorArchitecture="AMD64" name="MFCApp" type="win32"/>
   <asmv3:file name="MyApp.dll">
     <activatableClass
         name="MyApp.App"

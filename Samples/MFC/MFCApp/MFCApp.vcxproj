@@ -119,6 +119,7 @@
     <Manifest>
       <EnableDpiAwareness>PerMonitorHighDPIAware</EnableDpiAwareness>
       <AdditionalManifestFiles>app.manifest</AdditionalManifestFiles>
+      <AssemblyIdentity>MFCApp</AssemblyIdentity>
     </Manifest>
     <PostBuildEvent>
       <Command>
@@ -151,6 +152,7 @@
     <Manifest>
       <EnableDpiAwareness>PerMonitorHighDPIAware</EnableDpiAwareness>
       <AdditionalManifestFiles>app.manifest</AdditionalManifestFiles>
+      <AssemblyIdentity>MFCApp</AssemblyIdentity>
     </Manifest>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -180,6 +182,9 @@
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
+    <Manifest>
+      <AssemblyIdentity>MFCApp</AssemblyIdentity>
+    </Manifest>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -208,6 +213,9 @@
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
+    <Manifest>
+      <AssemblyIdentity>MFCApp</AssemblyIdentity>
+    </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\WindowsDesktopHost.h" />
