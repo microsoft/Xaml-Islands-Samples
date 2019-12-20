@@ -150,6 +150,12 @@ void CClassView::TreeViewodeSelectedHandler(IInspectable const& /* sender */, wi
 		while (docPos)
 		{
 			auto doc = dynamic_cast<CMFCAppDoc*>(docTemplate->GetNextDoc(docPos));
+
+			//In case user clicks [File -> New] when tree node is not selected, the node is nullptr.
+			//Handle this to avoid crash issue
+			if (doc == nullptr || doc->SelectedNode() == nullptr)
+				return static_cast<CMFCAppDoc*>(NULL);
+
 			if (doc->SelectedNode().Label() == fraberName)
 			{
 				return doc;
