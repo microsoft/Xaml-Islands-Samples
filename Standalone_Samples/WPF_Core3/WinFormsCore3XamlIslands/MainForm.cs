@@ -1,35 +1,31 @@
 ﻿using Helpers;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Interop;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Windows.Forms;
 using Windows.ApplicationModel.DataTransfer;
 
-namespace WPFCore3XamlIslads
+namespace MyWinFormsApp
 {
-    public partial class MainWindow : Window
+    public partial class MainForm : Form
     {
-
-        public MainWindow()
+        public MainForm()
         {
             InitializeComponent();
-            this.Loaded += MainWindow_Loaded;
+
+            this.windowsXamlHost1.InitialTypeName = "Samples.ManagedUWP.MainPage";
+            this.Load += MainForm_Load;
         }
 
-        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        private void MainForm_Load(object sender, EventArgs e)
         {
-            IntPtr hwnd = new WindowInteropHelper(Application.Current.MainWindow).Handle;
+
+            IntPtr hwnd = this.Handle;
             var dtm = DataTransferManagerHelper.GetForWindow(hwnd);
             dtm.DataRequested += OnDataRequested;
 
@@ -39,7 +35,7 @@ namespace WPFCore3XamlIslads
         string _text;
         private void ShowShareUI(string text)
         {
-            IntPtr hwnd = new WindowInteropHelper(Application.Current.MainWindow).Handle;
+            IntPtr hwnd =this.Handle;
             DataTransferManagerHelper.ShowShareUIForWindow(hwnd);
             _text = text;
         }

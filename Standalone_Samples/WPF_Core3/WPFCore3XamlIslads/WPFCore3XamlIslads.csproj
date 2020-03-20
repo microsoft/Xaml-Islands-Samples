@@ -10,11 +10,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Helpers\Helpers.csproj" />
     <ProjectReference Include="..\UWPApplication\UWPApplication.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Update="Microsoft.VCRTForwarders.140" Version="1.0.5" />
   </ItemGroup>
 
   <ItemGroup>

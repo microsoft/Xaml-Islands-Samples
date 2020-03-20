@@ -32,5 +32,13 @@ namespace Samples.ManagedUWP
             contentDialog.XamlRoot = (sender as Button).XamlRoot;
             await contentDialog.ShowAsync();
         }
+
+        private void OnShowShareText(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(shareText.Text))
+            {
+                UWPApplication.App.ShowShareUIForWindow(shareText.Text);
+            }
+        }
     }
 }

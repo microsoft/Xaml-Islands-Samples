@@ -39,5 +39,10 @@
             </StackPanel>
 
         </ContentDialog>
+
+        <TextBlock Text="DataTransferManager" Style="{StaticResource SubtitleTextBlockStyle}" />
+        <TextBox x:Name="shareText"  Header="Text to share" PlaceholderText="blah blah blah"/>
+        <Button Content="Share Text" Click="OnShowShareText" />
+        
     </StackPanel>
 </Page>

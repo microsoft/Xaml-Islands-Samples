@@ -21,6 +21,8 @@ namespace UWPApplication
 
     sealed partial class App : XamlApplication
     {
+        public static Action<string> ShowShareUIForWindow;
+
         public App()
         {
             this.Initialize();

@@ -72,6 +72,9 @@
     <Content Include="Images\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\WinFormsCore3XamlIslands\WinFormsCore3XamlIslads.csproj">
+      <SkipGetTargetFrameworkProperties>True</SkipGetTargetFrameworkProperties>
+    </ProjectReference>
     <ProjectReference Include="..\WPFCore3XamlIslads\WPFCore3XamlIslads.csproj">
       <SkipGetTargetFrameworkProperties>True</SkipGetTargetFrameworkProperties>
     </ProjectReference>
