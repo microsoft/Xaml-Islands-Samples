@@ -33,6 +33,7 @@
                 <NavigationViewItem  Content="Animations" Tag="AnimationsPage" />
                 <NavigationViewItem  Content="Layout" Tag="LayoutPage" />
                 <NavigationViewItem  Content="Media" Tag="MediaPage" />
+                <NavigationViewItem  Content="Win32 Integration" Tag="Win32IntegrationPage" />
             </NavigationView.MenuItems>
             <ScrollViewer>
                 <Frame x:Name="contentFrame"/>

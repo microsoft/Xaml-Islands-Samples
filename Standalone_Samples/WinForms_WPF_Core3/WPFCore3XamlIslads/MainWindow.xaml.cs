@@ -29,13 +29,17 @@ namespace WPFCore3XamlIslads
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            //Using WinRT DataTransferManager in Win32
             IntPtr hwnd = new WindowInteropHelper(Application.Current.MainWindow).Handle;
             var dtm = DataTransferManagerHelper.GetForWindow(hwnd);
             dtm.DataRequested += OnDataRequested;
-
             UWPApplication.App.ShowShareUIForWindow += ShowShareUI;
+
+            //Detect Orientation
+            Microsoft.Win32.SystemEvents.DisplaySettingsChanged += SystemEvents_DisplaySettingsChanged;
         }
 
+        #region Using WinRT DataTransferManager in Win32
         string _text;
         private void ShowShareUI(string text)
         {
@@ -58,5 +62,22 @@ namespace WPFCore3XamlIslads
                 deferral.Complete();
             }
         }
+        #endregion
+
+        #region Detect Orientation
+
+        private void SystemEvents_DisplaySettingsChanged(object sender, EventArgs e)
+        {
+            if (SystemParameters.PrimaryScreenWidth > SystemParameters.PrimaryScreenHeight)
+            {
+                UWPApplication.App.OrientationChanged(new UWPApplication.OrientationChangedEventArgs() { IsLandscape = true });
+            }
+            else
+            {
+                UWPApplication.App.OrientationChanged(new UWPApplication.OrientationChangedEventArgs() { IsLandscape = false });
+
+            }
+        }
+        #endregion
     }
 }

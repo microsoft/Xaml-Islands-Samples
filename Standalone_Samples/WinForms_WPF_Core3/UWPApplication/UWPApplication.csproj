@@ -156,9 +156,13 @@
     <Compile Include="Controls_Pages\TextPage.xaml.cs">
       <DependentUpon>TextPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls_Pages\Win32IntegrationPage.xaml.cs">
+      <DependentUpon>Win32IntegrationPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls_Pages\WinUIPage.xaml.cs">
       <DependentUpon>WinUIPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\DisplayInformation.cs" />
     <Compile Include="Helpers\WordGenerator.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -246,6 +250,10 @@
     <Page Include="Controls_Pages\TextPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls_Pages\Win32IntegrationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls_Pages\WinUIPage.xaml">
       <Generator>MSBuild:Compile</Generator>

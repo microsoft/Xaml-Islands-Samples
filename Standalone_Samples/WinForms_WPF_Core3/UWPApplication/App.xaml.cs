@@ -18,14 +18,19 @@ using Windows.UI.Xaml.Navigation;
 
 namespace UWPApplication
 {
-
     sealed partial class App : XamlApplication
     {
         public static Action<string> ShowShareUIForWindow;
+        public static Action<OrientationChangedEventArgs> OrientationChanged;
 
         public App()
         {
             this.Initialize();
         }
+    }
+
+    public class OrientationChangedEventArgs
+    {
+        public bool IsLandscape { get; set; }
     }
 }

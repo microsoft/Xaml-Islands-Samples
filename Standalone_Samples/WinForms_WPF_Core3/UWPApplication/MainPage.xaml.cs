@@ -60,6 +60,9 @@ namespace Samples.ManagedUWP
                     case "AnimationsPage":
                         pageType = typeof(AnimationsPage);
                         break;
+                    case "Win32IntegrationPage":
+                        pageType = typeof(Win32IntegrationPage);
+                        break;
 
                 }
                 if (pageType != null)
