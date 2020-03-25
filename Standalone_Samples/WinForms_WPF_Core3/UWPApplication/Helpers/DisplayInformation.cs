@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Windows.Graphics.Display;
 
-namespace Samples.ManagedUWP.Helpers
+namespace Samples.ManagedUWP.Helpers.Win32
 {
     public static class DisplayInformation
     {
@@ -40,6 +40,5 @@ namespace Samples.ManagedUWP.Helpers
 
             }
         }
-
     }
 }

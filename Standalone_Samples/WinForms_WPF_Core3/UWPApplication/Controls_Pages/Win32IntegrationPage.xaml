@@ -10,9 +10,12 @@
 
     <StackPanel HorizontalAlignment="Center" Spacing="10" Padding="20">
 
-        <TextBlock Text="Orientation"  Style="{StaticResource SubtitleTextBlockStyle}" />
-        <TextBlock x:Name="displayOrientation" Text="" />
-
+        <TextBlock Text="Orientation - Win32 Display Information"  Style="{StaticResource SubtitleTextBlockStyle}" />
+        <TextBlock x:Name="displayOrientationWin32" Text="" />
         
+        <TextBlock Text="Orientation - UWP Display Information"  Style="{StaticResource SubtitleTextBlockStyle}" />
+        <TextBlock x:Name="displayOrientationUWP" Text="" />
+
+
     </StackPanel>
 </Page>

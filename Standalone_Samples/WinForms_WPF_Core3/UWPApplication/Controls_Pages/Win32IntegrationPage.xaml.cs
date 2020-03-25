@@ -6,6 +6,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using UWPApplication;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -21,22 +22,36 @@ namespace Samples.ManagedUWP
         public Win32IntegrationPage()
         {
             this.InitializeComponent();
-            UWPApplication.App.OrientationChanged += OnOrientationChanged;
-            displayOrientation.Text = Helpers.DisplayInformation.CurrentOrientation.ToString();
+
+            UWPApplication.App.OrientationChanged += OnWin32OrientationChanged;
+            displayOrientationWin32.Text = Helpers.Win32.DisplayInformation.CurrentOrientation.ToString();
+
+            Windows.Graphics.Display.DisplayInformation.GetForCurrentView().OrientationChanged += OnOrientationChanged;
+            displayOrientationUWP.Text = Windows.Graphics.Display.DisplayInformation.GetForCurrentView().CurrentOrientation.ToString();
         }
 
-        private async void OnOrientationChanged(OrientationChangedEventArgs e)
+        private void OnOrientationChanged(Windows.Graphics.Display.DisplayInformation sender, object args)
+        {
+            if (sender.CurrentOrientation == Windows.Graphics.Display.DisplayOrientations.Landscape)
+            {
+                displayOrientationUWP.Text = "Landscape";
+            }
+            else if (sender.CurrentOrientation == Windows.Graphics.Display.DisplayOrientations.Portrait)
+            {
+                displayOrientationUWP.Text = "Portrait";
+            }
+        }
+
+        private void OnWin32OrientationChanged(OrientationChangedEventArgs e)
         {
             if (e.IsLandscape)
             {
-                displayOrientation.Text = "Landscape";
+                displayOrientationWin32.Text = "Landscape";
             }
             else
             {
-                displayOrientation.Text = "Portrait";
-
+                displayOrientationWin32.Text = "Portrait";
             }
         }
-
     }
 }
