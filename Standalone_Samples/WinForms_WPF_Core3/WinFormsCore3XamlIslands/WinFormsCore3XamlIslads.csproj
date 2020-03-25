@@ -9,37 +9,14 @@
     <AssetTargetFallback>uap10.0.18362</AssetTargetFallback>
     <ApplicationManifest>AppManifest.manifest</ApplicationManifest>
   </PropertyGroup>
-  <ItemGroup>
-    <Content Include="..\Shared_Components\Managed_WinRT_Comp\bin\$(PlatformName)\$(ConfigurationName)\**\*.xbf" LinkBase="Managed_WinRT_Comp">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\Shared_Components\Managed_WinRT_Comp\Assets\**" LinkBase="Assets">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="Assets\**" />
-    <Compile Remove="Debug\**" />
-    <Compile Remove="Managed_WinRT_Comp\**" />
-    <EmbeddedResource Remove="Assets\**" />
-    <EmbeddedResource Remove="Debug\**" />
-    <EmbeddedResource Remove="Managed_WinRT_Comp\**" />
-    <None Remove="Assets\**" />
-    <None Remove="Debug\**" />
-    <None Remove="Managed_WinRT_Comp\**" />
-  </ItemGroup>
+  
   <ItemGroup>
     <PackageReference Include="Microsoft.Toolkit.Forms.UI.XamlHost" Version="6.0.0" />
   </ItemGroup>
+  
   <ItemGroup>
     <ProjectReference Include="..\Helpers\Helpers.csproj" />
     <ProjectReference Include="..\UWPApplication\UWPApplication.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Update="Microsoft.VCRTForwarders.140" Version="1.0.1-rc" />
   </ItemGroup>
 
 </Project>

@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<assembly manifestVersion="1.0" xmlns="urn:schemas-microsoft-com:asm.v1">
+<assembly manifestVersion="1.0"
+          xmlns="urn:schemas-microsoft-com:asm.v1"
+          xmlns:asmv3="urn:schemas-microsoft-com:asm.v3">
   <assemblyIdentity version="1.0.0.0" name="MyApplication.app"/>
 
   <!-- This is the Registration-free WinRT libraries required to activate
@@ -8,7 +10,7 @@
        to install the NuGet Package Microsoft.VCRTForwarders
        For more details, read https://blogs.windows.com/buildingapps/2019/04/30/enhancing-non-packaged-desktop-apps-using-windows-runtime-components/
   -->
-  <file name="Native_SwapChainPanel_Comp.dll">
+  <asmv3:file name="Native_SwapChainPanel_Comp.dll">
     <activatableClass
         name="Native_SwapChainPanel_Comp.Direct2DPanel"
         threadingModel="both"
@@ -17,9 +19,8 @@
         name="Native_SwapChainPanel_Comp.CustomRenderer"
         threadingModel="both"
         xmlns="urn:schemas-microsoft-com:winrt.v1" />
-  </file>
-  
-  
+  </asmv3:file>
+
   <trustInfo xmlns="urn:schemas-microsoft-com:asm.v2">
     <security>
       <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
@@ -60,6 +61,9 @@
 
       <!-- Windows 10 -->
       <!--<supportedOS Id="{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}" />-->
+
+      <!-- Xaml Islands -->
+      <!--<maxversiontested Id="10.0.18362.0"/>-->
 
     </application>
   </compatibility>

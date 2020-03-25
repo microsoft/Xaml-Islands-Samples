@@ -1,6 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<assembly manifestVersion="1.0" xmlns="urn:schemas-microsoft-com:asm.v1">
+<assembly manifestVersion="1.0" 
+          xmlns="urn:schemas-microsoft-com:asm.v1"
+          xmlns:asmv3="urn:schemas-microsoft-com:asm.v3">
   <assemblyIdentity version="1.0.0.0" name="MyApplication.app"/>
+
+  <!-- This is the Registration-free WinRT libraries required to activate
+       native WinRT components in unpackaged apps. 
+       Native components use to require as well VC libs so it is recomenended 
+       to install the NuGet Package Microsoft.VCRTForwarders
+       For more details, read https://blogs.windows.com/buildingapps/2019/04/30/enhancing-non-packaged-desktop-apps-using-windows-runtime-components/
+  -->
+
+  <asmv3:file name="Native_SwapChainPanel_Comp.dll">
+    <activatableClass
+        name="Native_SwapChainPanel_Comp.Direct2DPanel"
+        threadingModel="both"
+        xmlns="urn:schemas-microsoft-com:winrt.v1" />
+    <activatableClass
+        name="Native_SwapChainPanel_Comp.CustomRenderer"
+        threadingModel="both"
+        xmlns="urn:schemas-microsoft-com:winrt.v1" />
+  </asmv3:file>
+  
   <trustInfo xmlns="urn:schemas-microsoft-com:asm.v2">
     <security>
       <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
@@ -43,26 +64,9 @@
       <!--<supportedOS Id="{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}" />-->
 
       <!-- Xaml Islands -->
-      <maxversiontested Id="10.0.18362.0"/>
+      <!--<maxversiontested Id="10.0.18362.0"/>-->
     </application>
   </compatibility>
-
-    <!-- This is the Registration-free WinRT libraries required to activate
-       native WinRT components in unpackaged apps. 
-       Native components use to require as well VC libs so it is recomenended 
-       to install the NuGet Package Microsoft.VCRTForwarders
-       For more details, read https://blogs.windows.com/buildingapps/2019/04/30/enhancing-non-packaged-desktop-apps-using-windows-runtime-components/
-  -->
-  <file name="Native_SwapChainPanel_Comp.dll">
-    <activatableClass
-        name="Native_SwapChainPanel_Comp.Direct2DPanel"
-        threadingModel="both"
-        xmlns="urn:schemas-microsoft-com:winrt.v1" />
-    <activatableClass
-        name="Native_SwapChainPanel_Comp.CustomRenderer"
-        threadingModel="both"
-        xmlns="urn:schemas-microsoft-com:winrt.v1" />
-  </file>
 
     <!-- Indicates that the application is DPI-aware and will not be automatically scaled by Windows at higher
        DPIs. Windows Presentation Foundation (WPF) applications are automatically DPI-aware and do not need 
