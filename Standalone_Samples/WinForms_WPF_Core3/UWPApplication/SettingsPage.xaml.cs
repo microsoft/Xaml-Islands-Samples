@@ -26,15 +26,11 @@ namespace Samples.ManagedUWP
         private void OnSettingsPageLoaded(object sender, RoutedEventArgs e)
         {
             var currentTheme = (this.XamlRoot.Content as Control).RequestedTheme.ToString();
-            try
-            {
-                (ThemePanel.Children.Cast<RadioButton>().FirstOrDefault(c => c?.Tag?.ToString() == currentTheme)).IsChecked = true;
-            }
-            catch
+            if (currentTheme == "Default")
             {
                 currentTheme = Application.Current.RequestedTheme.ToString();
-                (ThemePanel.Children.Cast<RadioButton>().FirstOrDefault(c => c?.Tag?.ToString() == currentTheme)).IsChecked = true;
             }
+            (ThemePanel.Children.Cast<RadioButton>().FirstOrDefault(c => c?.Tag?.ToString() == currentTheme)).IsChecked = true;
         }
 
         private void OnThemeRadioButtonChecked(object sender, RoutedEventArgs e)
