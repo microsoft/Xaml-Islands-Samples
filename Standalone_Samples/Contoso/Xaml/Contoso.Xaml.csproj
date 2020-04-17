@@ -7,7 +7,7 @@
     <ProjectGuid>{0157C60B-CF0C-43E9-819A-A4C895957D6B}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UWPApp</RootNamespace>
+    <RootNamespace>Contoso.Xaml</RootNamespace>
     <AssemblyName>UWPApp</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>

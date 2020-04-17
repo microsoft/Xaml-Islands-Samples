@@ -1,14 +1,12 @@
-﻿using Microsoft.Toolkit.Forms.UI.Controls;
-using System.Windows.Forms;
-using Contoso.Interop;
+﻿using System.Windows.Forms;
 
-namespace ContosoApp
+namespace Contoso.Web
 {
     public partial class ContosoWebControl : UserControl
     {
-        private readonly IMainFormInterop mainFormInterop;
+        private readonly Interop.IMainFormInterop mainFormInterop;
 
-        public ContosoWebControl(IMainFormInterop mainFormInterop)
+        public ContosoWebControl(Interop.IMainFormInterop mainFormInterop)
         {
             this.mainFormInterop = mainFormInterop;
             InitializeComponent();

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace ContosoApp
+namespace Contoso.Web
 {
     partial class ContosoWebControl
     {

@@ -1,25 +1,24 @@
-﻿using Contoso.Interop;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows.Forms;
 
-namespace ContosoApp
+namespace Contoso.App
 {
-    public partial class MainForm : Form, IMainFormInterop
+    public partial class MainForm : Form, Interop.IMainFormInterop
     {
-        private ContosoWebControl webControl;
+        private Web.ContosoWebControl webControl;
 
         public MainForm()
         {
             InitializeComponent();
         }
 
-        private ContosoWebControl WebControl
+        private Web.ContosoWebControl WebControl
         {
             get
             {
                 if (this.webControl == null)
                 {
-                    this.webControl = new ContosoWebControl(this)
+                    this.webControl = new Web.ContosoWebControl(this)
                     {
                         Dock = System.Windows.Forms.DockStyle.Fill,
                         Location = new System.Drawing.Point(0, 0),

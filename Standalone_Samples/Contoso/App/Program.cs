@@ -1,10 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ContosoApp
+namespace Contoso.App
 {
     static class Program
     {
@@ -14,7 +11,7 @@ namespace ContosoApp
         [STAThread]
         static void Main()
         {
-            using (new UWPApp.App())
+            using (new Xaml.App())
             {
                 Application.SetHighDpiMode(HighDpiMode.SystemAware);
                 Application.EnableVisualStyles();

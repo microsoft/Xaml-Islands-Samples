@@ -1,4 +1,4 @@
-﻿namespace ContosoApp
+﻿namespace Contoso.App
 {
     partial class MainForm
     {

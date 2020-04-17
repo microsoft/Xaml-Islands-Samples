@@ -1,6 +1,6 @@
 ﻿using Windows.UI.Xaml;
 
-namespace UWPApp
+namespace Contoso.Xaml
 {
     public sealed partial class App
     {
