@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30001.183
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contoso.App", "ContosoApp\Contoso.App.csproj", "{A41175FF-5B05-427C-801B-5CA9E8588538}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contoso.App", "App\Contoso.App.csproj", "{A41175FF-5B05-427C-801B-5CA9E8588538}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contoso.Xaml", "UWPApp\Contoso.Xaml.csproj", "{0157C60B-CF0C-43E9-819A-A4C895957D6B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contoso.Xaml", "Xaml\Contoso.Xaml.csproj", "{0157C60B-CF0C-43E9-819A-A4C895957D6B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contoso.Web", "ContonsoWeb\Contoso.Web.csproj", "{7C12942C-02CA-4B4A-8CC9-6B84AF34D5B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contoso.Web", "Web\Contoso.Web.csproj", "{7C12942C-02CA-4B4A-8CC9-6B84AF34D5B7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contoso.Interop", "Interop\Contoso.Interop.csproj", "{56A55FCF-F9FF-406C-ADFC-5C9B3D05E72D}"
 EndProject
