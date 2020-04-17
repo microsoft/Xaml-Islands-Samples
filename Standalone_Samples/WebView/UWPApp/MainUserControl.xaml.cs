@@ -14,5 +14,10 @@ namespace UWPApp
             this.mainFormInterop = mainFormInterop;
             this.InitializeComponent();
         }
+
+        private void OnGotoWeb(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            this.mainFormInterop.SwitchUI();
+        }
     }
 }

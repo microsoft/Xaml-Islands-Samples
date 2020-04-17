@@ -1,4 +1,5 @@
 ﻿using Contoso.Interop;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace ContosoApp
@@ -34,7 +35,15 @@ namespace ContosoApp
 
         public void SwitchUI()
         {
-            throw new System.NotImplementedException();
+            var currentControl = this.Controls.OfType<Control>().Single();
+            bool currentContentIsXaml = (currentControl == this.mainUserControl);
+            var newControl = currentContentIsXaml ? this.WebControl : this.mainUserControl;
+
+            this.SuspendLayout();
+            this.Controls.Remove(currentControl);
+            this.Controls.Add(newControl);
+            this.ResumeLayout(false);
+            this.PerformLayout();
         }
     }
 }

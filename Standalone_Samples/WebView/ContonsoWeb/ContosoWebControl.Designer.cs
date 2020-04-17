@@ -1,4 +1,6 @@
-﻿namespace ContosoApp
+﻿using System.Windows.Forms;
+
+namespace ContosoApp
 {
     partial class ContosoWebControl
     {
@@ -28,23 +30,37 @@
         private void InitializeComponent()
         {
             this.webView = new Microsoft.Toolkit.Forms.UI.Controls.WebView();
+            this.goBackButton = new Button();
+
             ((System.ComponentModel.ISupportInitialize)(this.webView)).BeginInit();
             this.SuspendLayout();
             // 
-            // pictureBox1
+            // webView
             // 
             this.webView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webView.Location = new System.Drawing.Point(0, 0);
+            this.webView.Location = new System.Drawing.Point(0, 00);
             this.webView.Name = "webView";
             this.webView.Size = new System.Drawing.Size(1194, 474);
             this.webView.TabIndex = 0;
             this.webView.TabStop = false;
+
+            // 
+            // goBackButton
+            // 
+            this.goBackButton.Location = new System.Drawing.Point(0, 0);
+            this.goBackButton.Name = "goBackButton";
+            this.goBackButton.Text = "Go Back";
+            this.goBackButton.Size = new System.Drawing.Size(200, 50);
+            this.goBackButton.TabIndex = 0;
+            this.goBackButton.TabStop = false;
+            this.goBackButton.Click += OnGoBackButtonClick;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 30F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1194, 474);
+            this.Controls.Add(this.goBackButton);
             this.Controls.Add(this.webView);
             this.Name = "ContosoWebControl";
             this.Text = "Contoso Web Control";
@@ -56,5 +72,6 @@
         #endregion
 
         private Microsoft.Toolkit.Forms.UI.Controls.WebView webView;
+        private Button goBackButton;
     }
 }

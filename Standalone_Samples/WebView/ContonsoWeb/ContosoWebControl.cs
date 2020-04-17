@@ -14,5 +14,10 @@ namespace ContosoApp
             InitializeComponent();
             this.webView.Navigate("http://www.microsoft.com");
         }
+
+        private void OnGoBackButtonClick(object sender, System.EventArgs e)
+        {
+            this.mainFormInterop.SwitchUI();
+        }
     }
 }

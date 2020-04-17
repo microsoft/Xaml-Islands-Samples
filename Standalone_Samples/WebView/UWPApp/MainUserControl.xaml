@@ -12,6 +12,6 @@
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
             <TextBox Text="Hello from Xaml"/>
         </StackPanel>
-        <Button>Click Me</Button>
+        <Button Click="OnGotoWeb">Goto Web</Button>
     </StackPanel>
 </UserControl>
