@@ -1,14 +1,14 @@
 ﻿namespace ContosoApp
 {
-    partial class MainForm
+    partial class ContosoWebControl
     {
-        /// <summary>
-        ///  Required designer variable.
+        /// <summary> 
+        /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        ///  Clean up any resources being used.
+        /// <summary> 
+        /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
@@ -19,7 +19,6 @@
             }
             base.Dispose(disposing);
         }
-
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -28,36 +27,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.mainUserControl = new MainUserControl(this);
-            //((System.ComponentModel.ISupportInitialize)(this.mainUserControl)).BeginInit();
+            this.webView = new Microsoft.Toolkit.Forms.UI.Controls.WebView();
+            ((System.ComponentModel.ISupportInitialize)(this.webView)).BeginInit();
             this.SuspendLayout();
             // 
-            // mainUserControl
+            // pictureBox1
             // 
-            this.mainUserControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mainUserControl.Location = new System.Drawing.Point(0, 0);
-            this.mainUserControl.Name = "mainUserControl";
-            this.mainUserControl.Size = new System.Drawing.Size(1194, 474);
-            this.mainUserControl.TabIndex = 0;
-            this.mainUserControl.TabStop = false;
+            this.webView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.webView.Location = new System.Drawing.Point(0, 0);
+            this.webView.Name = "webView";
+            this.webView.Size = new System.Drawing.Size(1194, 474);
+            this.webView.TabIndex = 0;
+            this.webView.TabStop = false;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 30F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1194, 474);
-            this.Controls.Add(this.mainUserControl);
-            this.Name = "MainForm";
-            this.Text = "Main Form";
-            //((System.ComponentModel.ISupportInitialize)(this.mainUserControl)).EndInit();
+            this.Controls.Add(this.webView);
+            this.Name = "ContosoWebControl";
+            this.Text = "Contoso Web Control";
+            ((System.ComponentModel.ISupportInitialize)(this.webView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
 
-        private System.Windows.Forms.Control mainUserControl;
+        private Microsoft.Toolkit.Forms.UI.Controls.WebView webView;
     }
 }
-

@@ -13,7 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\UWPApp\UWPApp.csproj" />
+    <ProjectReference Include="..\ContonsoWeb\Contoso.Web.csproj" />
+    <ProjectReference Include="..\Interop\Contoso.Interop.csproj" />
+    <ProjectReference Include="..\UWPApp\Contoso.Xaml.csproj" />
   </ItemGroup>
 
 </Project>
