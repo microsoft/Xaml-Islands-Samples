@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Platforms>x86;x64</Platforms>
+    <AssetTargetFallback>uap10.0.18362</AssetTargetFallback>
   </PropertyGroup>
 
   <ItemGroup>
