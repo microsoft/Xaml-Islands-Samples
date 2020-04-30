@@ -13,7 +13,7 @@ Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "WAP", "WAP\WAP.wapproj", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinFormsCore3XamlIslads", "WinFormsCore3XamlIslands\WinFormsCore3XamlIslads.csproj", "{32C3E7B2-D607-4AC4-B248-291DE24FF8F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helpers", "Helpers\Helpers.csproj", "{84512419-CFED-4A85-998D-2E648223D62B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helpers", "Helpers\Helpers.csproj", "{84512419-CFED-4A85-998D-2E648223D62B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

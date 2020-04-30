@@ -26,6 +26,7 @@ namespace winrt::UWPApplication::implementation
 
     void MyUserControl::ClickHandler(IInspectable const&, RoutedEventArgs const&)
     {
-        Button().Content(box_value(L"Clicked"));
+        MyButton().Content(box_value(L"Clicked"));
+        MyPopup().IsOpen(true);
     }
 }

@@ -8,6 +8,13 @@
     mc:Ignorable="d">
 
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Button x:Name="Button" Click="ClickHandler">Click Me</Button>
+        <TextBox PlaceholderText="Write something..." Width="200" />
+        <Button x:Name="MyButton" Click="ClickHandler">Click Me</Button>
+        <Popup x:Name="MyPopup" >
+            <Grid Padding="40" Background="LightBlue">
+            <TextBlock Text="Popup"/>
+            </Grid>
+        </Popup>
+        
     </StackPanel>
 </UserControl>

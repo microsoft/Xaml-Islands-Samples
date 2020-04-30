@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -25,6 +26,23 @@ namespace Samples.ManagedUWP
         public TextPage()
         {
             this.InitializeComponent();
+            CoreWindow.GetForCurrentThread().CharacterReceived += App_CharacterReceived;
+            CoreWindow.GetForCurrentThread().KeyDown += App_KeyDown;
+            CoreWindow.GetForCurrentThread().PointerPressed += App_PointerPressed;
+        }
+        private void App_PointerPressed(CoreWindow sender, PointerEventArgs args)
+        {
+            System.Diagnostics.Debug.Write($"PR:{args.CurrentPoint.ToString()} ");
+        }
+
+        private void App_KeyDown(CoreWindow sender, KeyEventArgs args)
+        {
+            System.Diagnostics.Debug.Write($"KD:{args.VirtualKey} ");
+        }
+
+        private void App_CharacterReceived(CoreWindow sender, CharacterReceivedEventArgs args)
+        {
+            System.Diagnostics.Debug.Write($"CR:{args.KeyCode} ");
         }
 
         private void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
@@ -44,5 +62,7 @@ namespace Samples.ManagedUWP
         {
             //SuggestionOutput.Text = args.SelectedItem.ToString();
         }
+
+       
     }
 }

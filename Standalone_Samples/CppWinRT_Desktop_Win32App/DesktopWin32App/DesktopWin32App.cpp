@@ -199,6 +199,23 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             _desktopWindowXamlSource = nullptr;
         }
         break;
+    case WM_MOVE:
+        if (_desktopWindowXamlSource != nullptr)
+        {
+            auto content = _desktopWindowXamlSource.Content().as< winrt::UWPApplication::MyUserControl>();
+            if (content != nullptr)
+            {
+                auto popups = Windows::UI::Xaml::Media::VisualTreeHelper::GetOpenPopupsForXamlRoot(content.XamlRoot());
+                if (popups.Size() > 0)
+                {
+                    /*for (Windows::UI::Xaml::Controls::Primitives::Popup&& popup : popups)
+                    {
+                        popup.IsOpen(true);
+                    }*/
+                }
+            }
+        }
+        break;
 
     default:
         return DefWindowProc(hWnd, message, wParam, lParam);

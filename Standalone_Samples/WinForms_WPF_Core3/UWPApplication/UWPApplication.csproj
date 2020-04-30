@@ -188,6 +188,7 @@
     <Content Include="Assets\SampleMedia\LandscapeImage6.jpg" />
     <Content Include="Assets\SampleMedia\LandscapeImage7.jpg" />
     <Content Include="Assets\SampleMedia\LandscapeImage8.jpg" />
+    <Content Include="Assets\SampleMedia\MirrorPCConsent.svg" />
     <Content Include="Assets\SampleMedia\notepad.jpg" />
     <Content Include="Assets\SampleMedia\rainier.jpg" />
     <Content Include="Assets\SampleMedia\sunset.jpg" />
@@ -274,10 +275,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.2.9</Version>
+      <Version>6.2.10</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Win32.UI.XamlApplication">
-      <Version>6.0.0</Version>
+      <Version>6.0.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml">
       <Version>2.4.0-prerelease.200113001</Version>

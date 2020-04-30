@@ -22,7 +22,7 @@
 
         <TextBlock Text="TextBox"  Style="{StaticResource SubtitleTextBlockStyle}" />
         <TextBox Header="Enter your name" PlaceholderText="Name" />
-
+       
         <TextBlock Text="Multi-line TextBox with custom highlight color"  Style="{StaticResource SubtitleTextBlockStyle}" />
         <TextBlock Text="Press enter key to insert lines." />
         <TextBox AutomationProperties.Name="multi-line TextBox" TextWrapping="Wrap" AcceptsReturn="True" IsSpellCheckEnabled="True" SelectionHighlightColor="Green" />

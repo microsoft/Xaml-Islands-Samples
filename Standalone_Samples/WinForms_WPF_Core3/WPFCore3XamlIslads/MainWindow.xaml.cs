@@ -47,7 +47,7 @@ namespace WPFCore3XamlIslads
             DataTransferManagerHelper.ShowShareUIForWindow(hwnd);
             _text = text;
         }
-        async void OnDataRequested(DataTransferManager sender, DataRequestedEventArgs args)
+        private void OnDataRequested(DataTransferManager sender, DataRequestedEventArgs args)
         {
             var deferral = args.Request.GetDeferral();
 
