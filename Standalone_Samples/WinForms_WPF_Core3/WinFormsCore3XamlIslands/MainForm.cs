@@ -19,7 +19,7 @@ namespace MyWinFormsApp
         {
             InitializeComponent();
 
-            this.windowsXamlHost1.InitialTypeName = "Samples.ManagedUWP.MainPage";
+            this.windowsXamlHost1.Child = new Samples.ManagedUWP.MainPage();
             this.Load += MainForm_Load;
         }
 
