@@ -193,6 +193,11 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Interop\Contoso.Interop.csproj">
+      <Project>{56a55fcf-f9ff-406c-adfc-5c9b3d05e72d}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.0.1\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.targets" Condition="Exists('..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.0.1\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.targets')" />
