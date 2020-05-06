@@ -6,6 +6,7 @@
     <AssetTargetFallback>uap10.0.18362</AssetTargetFallback>
     <UseWindowsForms>true</UseWindowsForms>
     <Platforms>x64;x86</Platforms>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,7 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Web\Contoso.Web.csproj" />
     <ProjectReference Include="..\Interop\Contoso.Interop.csproj" />
-    <ProjectReference Include="..\Xaml\Contoso.Xaml.csproj" />
+    <ProjectReference Include="..\Xaml.Native\Xaml.Native.vcxproj" />
   </ItemGroup>
 
 </Project>

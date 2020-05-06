@@ -27,13 +27,7 @@
 #include <winrt/Windows.UI.Composition.Scenes.h>
 #include <winrt/Windows.Storage.h>
 
-#include <winrt/Microsoft.UI.Xaml.Controls.h>
-#include <winrt/Microsoft.UI.Xaml.Controls.Primitives.h>
-#include <winrt/Microsoft.UI.Xaml.XamlTypeInfo.h>
-
-#include <winrt/SceneLoaderComponent.h>
-
-#include <winrt/SampleUserControl.h>
-#include <winrt/SampleLibraryCS.h>
-#include <winrt/SampleLibraryCS.SampleLibraryCS_XamlTypeInfo.h>
+//#include <winrt/Microsoft.UI.Xaml.Controls.h>
+//#include <winrt/Microsoft.UI.Xaml.Controls.Primitives.h>
+//#include <winrt/Microsoft.UI.Xaml.XamlTypeInfo.h>
 

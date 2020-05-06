@@ -1,8 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\..\..\packages\SceneLoaderComponent.1.0.0.1\build\native\SceneLoaderComponent.props" Condition="Exists('..\..\..\packages\SceneLoaderComponent.1.0.0.1\build\native\SceneLoaderComponent.props')" />
-  <Import Project="..\..\..\packages\Microsoft.Windows.CppWinRT.2.0.191111.2\build\native\Microsoft.Windows.CppWinRT.props" Condition="Exists('..\..\..\packages\Microsoft.Windows.CppWinRT.2.0.191111.2\build\native\Microsoft.Windows.CppWinRT.props')" />
-  <Import Project="..\..\..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.0.0\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.props" Condition="Exists('..\..\..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.0.0\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.props')" />
+  <Import Project="..\packages\Microsoft.Windows.CppWinRT.2.0.200316.3\build\native\Microsoft.Windows.CppWinRT.props" Condition="Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.200316.3\build\native\Microsoft.Windows.CppWinRT.props')" />
+  <Import Project="..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.0.1\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.props" Condition="Exists('..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.0.1\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.props')" />
   <PropertyGroup Label="Globals">
     <CppWinRTEnabled>true</CppWinRTEnabled>
     <MinimalCoreWin>true</MinimalCoreWin>
@@ -137,34 +136,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClInclude>
-    <ClInclude Include="Display3DUserControl.h">
-      <DependentUpon>Display3DUserControl.xaml</DependentUpon>
-    </ClInclude>
-    <ClInclude Include="FilePathToBitmapImageConverter.h">
-      <DependentUpon>FilePathToBitmapImageConverter.idl</DependentUpon>
-      <SubType>Code</SubType>
-    </ClInclude>
-    <ClInclude Include="ImagePreviewerUserControl.h">
-      <DependentUpon>ImagePreviewerUserControl.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </ClInclude>
-    <ClInclude Include="MediaPlayerControl.h">
-      <DependentUpon>MediaPlayerControl.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </ClInclude>
     <ClInclude Include="MainUserControl.h">
       <DependentUpon>MainUserControl.xaml</DependentUpon>
       <SubType>Code</SubType>
     </ClInclude>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="TreeViewHostUserControl.h">
-      <DependentUpon>TreeViewHostUserControl.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </ClInclude>
-    <ClInclude Include="TreeViewNodeViewModel.h">
-      <DependentUpon>TreeViewNodeViewModel.idl</DependentUpon>
-      <SubType>Code</SubType>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -197,33 +173,10 @@
     <ClCompile Include="MainUserControl.cpp">
       <DependentUpon>MainUserControl.xaml</DependentUpon>
     </ClCompile>
-    <ClCompile Include="Display3DUserControl.cpp">
-      <DependentUpon>Display3DUserControl.xaml</DependentUpon>
-    </ClCompile>
-    <ClCompile Include="FilePathToBitmapImageConverter.cpp">
-      <DependentUpon>FilePathToBitmapImageConverter.idl</DependentUpon>
-      <SubType>Code</SubType>
-    </ClCompile>
-    <ClCompile Include="ImagePreviewerUserControl.cpp">
-      <DependentUpon>ImagePreviewerUserControl.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </ClCompile>
-    <ClCompile Include="MediaPlayerControl.cpp">
-      <DependentUpon>MediaPlayerControl.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </ClCompile>
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
-    <ClCompile Include="TreeViewHostUserControl.cpp">
-      <DependentUpon>TreeViewHostUserControl.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </ClCompile>
-    <ClCompile Include="TreeViewNodeViewModel.cpp">
-      <DependentUpon>TreeViewNodeViewModel.idl</DependentUpon>
-      <SubType>Code</SubType>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Midl Include="MainUserControl.idl">
@@ -234,80 +187,24 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Midl>
-    <Midl Include="Display3DuserControl.idl">
-      <DependentUpon>Display3DUserControl.xaml</DependentUpon>
-    </Midl>
-    <Midl Include="FilePathToBitmapImageConverter.idl">
-      <SubType>Designer</SubType>
-    </Midl>
-    <Midl Include="ImagePreviewerUserControl.idl">
-      <DependentUpon>ImagePreviewerUserControl.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Midl>
-    <Midl Include="MediaPlayerControl.idl">
-      <DependentUpon>MediaPlayerControl.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Midl>
-    <Midl Include="TreeViewHostUserControl.idl">
-      <DependentUpon>TreeViewHostUserControl.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Midl>
-    <Midl Include="TreeViewNodeViewModel.idl">
-      <SubType>Designer</SubType>
-    </Midl>
   </ItemGroup>
   <ItemGroup>
     <Page Include="MainUserControl.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Display3DUserControl.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="ImagePreviewerUserControl.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MediaPlayerControl.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="TreeViewHostUserControl.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <!-- HACK BEGIN -->
-    <Reference Include="SceneLoaderComponent">
-      <HintPath>..\..\..\packages\SceneLoaderComponent.1.0.0-build.5\lib\uap10.0\SceneLoaderComponent.winmd</HintPath>
-      <IsWinMDFile>true</IsWinMDFile>
-    </Reference>
-    <Reference Include="SampleLibraryCS.winmd">
-      <HintPath>..\..\Managed\SampleLibraryCS\bin\x64\$(Configuration)\SampleLibraryCS.winmd</HintPath>
-      <IsWinMDFile>true</IsWinMDFile>
-    </Reference>
-    <!-- HACK END -->
-    <ProjectReference Include="..\..\Managed\SampleLibraryCS\SampleLibraryCS.csproj">
-      <Project>{92a2ac96-b414-455e-afe3-a6872591db93}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\SampleUserControl\SampleUserControl.vcxproj">
-      <Project>{b6b66dba-c720-4407-b490-6ae3fc2870fc}</Project>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
-    <Import Project="..\..\..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.0.0\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.targets" Condition="Exists('..\..\..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.0.0\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.targets')" />
-    <Import Project="..\..\..\packages\Microsoft.UI.Xaml.2.3.191125001-prerelease\build\native\Microsoft.UI.Xaml.targets" Condition="Exists('..\..\..\packages\Microsoft.UI.Xaml.2.3.191125001-prerelease\build\native\Microsoft.UI.Xaml.targets')" />
-    <Import Project="..\..\..\packages\Microsoft.Windows.CppWinRT.2.0.191111.2\build\native\Microsoft.Windows.CppWinRT.targets" Condition="Exists('..\..\..\packages\Microsoft.Windows.CppWinRT.2.0.191111.2\build\native\Microsoft.Windows.CppWinRT.targets')" />
-    <Import Project="..\..\..\packages\SceneLoaderComponent.1.0.0.1\build\native\SceneLoaderComponent.targets" Condition="Exists('..\..\..\packages\SceneLoaderComponent.1.0.0.1\build\native\SceneLoaderComponent.targets')" />
+    <Import Project="..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.0.1\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.targets" Condition="Exists('..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.0.1\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.targets')" />
+    <Import Project="..\packages\Microsoft.Windows.CppWinRT.2.0.200316.3\build\native\Microsoft.Windows.CppWinRT.targets" Condition="Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.200316.3\build\native\Microsoft.Windows.CppWinRT.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\..\..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.0.0\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.0.0\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.props'))" />
-    <Error Condition="!Exists('..\..\..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.0.0\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.0.0\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.targets'))" />
-    <Error Condition="!Exists('..\..\..\packages\Microsoft.UI.Xaml.2.3.191125001-prerelease\build\native\Microsoft.UI.Xaml.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Microsoft.UI.Xaml.2.3.191125001-prerelease\build\native\Microsoft.UI.Xaml.targets'))" />
-    <Error Condition="!Exists('..\..\..\packages\Microsoft.Windows.CppWinRT.2.0.191111.2\build\native\Microsoft.Windows.CppWinRT.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Microsoft.Windows.CppWinRT.2.0.191111.2\build\native\Microsoft.Windows.CppWinRT.props'))" />
-    <Error Condition="!Exists('..\..\..\packages\Microsoft.Windows.CppWinRT.2.0.191111.2\build\native\Microsoft.Windows.CppWinRT.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Microsoft.Windows.CppWinRT.2.0.191111.2\build\native\Microsoft.Windows.CppWinRT.targets'))" />
-    <Error Condition="!Exists('..\..\..\packages\SceneLoaderComponent.1.0.0.1\build\native\SceneLoaderComponent.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\SceneLoaderComponent.1.0.0.1\build\native\SceneLoaderComponent.props'))" />
-    <Error Condition="!Exists('..\..\..\packages\SceneLoaderComponent.1.0.0.1\build\native\SceneLoaderComponent.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\SceneLoaderComponent.1.0.0.1\build\native\SceneLoaderComponent.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.0.1\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.0.1\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.0.1\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.0.1\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.200316.3\build\native\Microsoft.Windows.CppWinRT.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Windows.CppWinRT.2.0.200316.3\build\native\Microsoft.Windows.CppWinRT.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Windows.CppWinRT.2.0.200316.3\build\native\Microsoft.Windows.CppWinRT.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Windows.CppWinRT.2.0.200316.3\build\native\Microsoft.Windows.CppWinRT.targets'))" />
   </Target>
 </Project>

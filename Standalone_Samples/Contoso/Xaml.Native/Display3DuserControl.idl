@@ -1,9 +1,0 @@
-namespace MyApp
-{
-	[default_interface]
-	runtimeclass Display3DUserControl : Windows.UI.Xaml.Controls.UserControl
-	{
-		Display3DUserControl();
-		String ModelPath;
-	}
-}

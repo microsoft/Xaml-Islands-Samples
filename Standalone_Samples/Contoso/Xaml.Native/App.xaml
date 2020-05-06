@@ -9,7 +9,4 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     RequestedTheme="Light"
     mc:Ignorable="d">
-    <Toolkit:XamlApplication.Resources>
-        <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls"/>
-    </Toolkit:XamlApplication.Resources>
 </Toolkit:XamlApplication>
