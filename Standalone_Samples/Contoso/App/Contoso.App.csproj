@@ -16,8 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Web\Contoso.Web.csproj" />
     <ProjectReference Include="..\Interop\Contoso.Interop.csproj" />
-    <ProjectReference Include="..\Xaml.Native\Xaml.Native.vcxproj" />
-    <ProjectReference Include="..\Xaml\Xaml.Native.vcxproj" />
+    <ProjectReference Include="..\Xaml\Contoso.Xaml.vcxproj" />
   </ItemGroup>
 
 </Project>
