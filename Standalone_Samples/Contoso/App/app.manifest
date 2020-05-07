@@ -23,7 +23,7 @@
       </requestedPrivileges>
     </security>
   </trustInfo>
-  <asmv3:file name="Contoso.Xaml.Native.dll">
+  <asmv3:file name="Contoso.Xaml.dll">
     <activatableClass
         name="MyApp.App"
         threadingModel="both"

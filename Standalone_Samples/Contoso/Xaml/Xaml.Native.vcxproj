@@ -6,7 +6,7 @@
     <CppWinRTEnabled>true</CppWinRTEnabled>
     <MinimalCoreWin>true</MinimalCoreWin>
     <ProjectGuid>{c4b7649d-c389-4f2c-b0b8-b55a08c8133f}</ProjectGuid>
-    <ProjectName>Contoso.Xaml.Native</ProjectName>
+    <ProjectName>Contoso.Xaml</ProjectName>
     <RootNamespace>MyApp</RootNamespace>
     <DefaultLanguage>en-US</DefaultLanguage>
     <MinimumVisualStudioVersion>15.0</MinimumVisualStudioVersion>
