@@ -24,6 +24,20 @@ namespace UWPApplication
         public static Action<string> ShowShareUIForWindow;
         public static Action<OrientationChangedEventArgs> OrientationChanged;
 
+        IntPtr windowHandle;
+        public IntPtr WindowHandle
+        {
+            get
+            {
+                return windowHandle;
+            }
+            set
+            {
+                windowHandle = value;
+            }
+        }
+
+
         public App()
         {
             this.Initialize();

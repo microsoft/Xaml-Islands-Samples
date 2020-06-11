@@ -43,6 +43,12 @@
         <TextBlock Text="DataTransferManager" Style="{StaticResource SubtitleTextBlockStyle}" />
         <TextBox x:Name="shareText" Width="150"  Header="Text to share" PlaceholderText="Insert text before sharing"/>
         <Button Content="Share Text" Click="OnShowShareText" />
-        
+
+        <TextBlock Text="UWP File Picker" Style="{StaticResource SubtitleTextBlockStyle}" />
+        <Button Content="Open File Picker" Click="OnOpenFilePicker" />
+        <TextBlock x:Name="filePickerText" Text="" />
+
+
+
     </StackPanel>
 </Page>
