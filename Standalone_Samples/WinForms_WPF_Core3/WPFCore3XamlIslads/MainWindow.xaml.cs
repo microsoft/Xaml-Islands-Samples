@@ -31,12 +31,17 @@ namespace WPFCore3XamlIslads
         {
             //Using WinRT DataTransferManager in Win32
             IntPtr hwnd = new WindowInteropHelper(Application.Current.MainWindow).Handle;
+
             var dtm = DataTransferManagerHelper.GetForWindow(hwnd);
             dtm.DataRequested += OnDataRequested;
             UWPApplication.App.ShowShareUIForWindow += ShowShareUI;
 
             //Detect Orientation
             Microsoft.Win32.SystemEvents.DisplaySettingsChanged += SystemEvents_DisplaySettingsChanged;
+
+            //Pass the WinForm's Hwmd to the UWP Application
+            (UWPApplication.App.Current as UWPApplication.App).WindowHandle = hwnd;
+
         }
 
         #region Using WinRT DataTransferManager in Win32
