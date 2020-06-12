@@ -3,5 +3,6 @@
     public interface IMainFormInterop
     {
         void SwitchUI();
+        ulong WindowHandle { get; } 
     }
 }

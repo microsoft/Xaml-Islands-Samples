@@ -17,8 +17,13 @@ namespace winrt::MyApp::implementation
         MainUserControl(winrt::Contoso::Interop::IMainFormInterop interop);
 
         void OnGotoWeb(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e);
+        void OnShare(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e);
+
     private:
         winrt::Contoso::Interop::IMainFormInterop mainFormInterop;
+        winrt::Windows::ApplicationModel::DataTransfer::DataTransferManager dataTransferManager{ nullptr };
+        winrt::event_token dataRequestedEventToken;
+        void OnDataRequested(winrt::Windows::ApplicationModel::DataTransfer::DataTransferManager const& sender, winrt::Windows::ApplicationModel::DataTransfer::DataRequestedEventArgs const& e);
     };
 }
 

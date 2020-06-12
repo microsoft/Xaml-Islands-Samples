@@ -15,5 +15,6 @@
             <TextBox Text="Hello from Xaml"/>
         </StackPanel>
         <Button Click="OnGotoWeb">Goto Web</Button>
+        <Button Click="OnShare">Share</Button>
     </StackPanel>
 </UserControl>

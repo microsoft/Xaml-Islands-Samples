@@ -44,5 +44,14 @@ namespace Contoso.App
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        public ulong WindowHandle
+        {
+            get
+            {
+                return (ulong)this.Handle.ToInt64();
+            }
+        }
+
     }
 }
