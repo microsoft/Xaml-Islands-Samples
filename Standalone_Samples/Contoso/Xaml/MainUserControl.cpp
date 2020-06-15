@@ -26,15 +26,11 @@ namespace winrt::MyApp::implementation
         InitializeComponent();
 
         dataTransferManager = DataTransferManager::GetForCurrentView();
-
-        static Windows::Foundation::TypedEventHandler<Windows::ApplicationModel::DataTransfer::DataTransferManager, Windows::ApplicationModel::DataTransfer::DataRequestedEventArgs> eventHandler = { this, &MainUserControl::OnDataRequested };
-        dataRequestedEventToken = dataTransferManager.DataRequested(eventHandler);
-
-        //dataRequestedEventToken = dataTransferManager.DataRequested({ this, &MainUserControl::OnDataRequested });
-
         auto initWithWindow = dataTransferManager.as<IInitializeWithWindow>();
         HWND mainWindow = reinterpret_cast<HWND>(mainFormInterop.WindowHandle());
         initWithWindow->Initialize(mainWindow);
+
+        static auto ev = dataRequestedEventToken = dataTransferManager.DataRequested({ this, &MainUserControl::OnDataRequested });
     }
 
     void MainUserControl::OnDataRequested(DataTransferManager const& sender, DataRequestedEventArgs const& e)
