@@ -1,18 +1,7 @@
 ﻿#include "pch.h"
 #include "MainUserControl.h"
 #include <winrt/Windows.ApplicationModel.DataTransfer.h>
-
-//#define SHGDNF enum
-//#include <Shobjidl_core.h>
-
-MIDL_INTERFACE("3E68D4BD-7135-4D10-8018-9FB6D9F33FA1")
-IInitializeWithWindow : public IUnknown
-{
-public:
-    virtual HRESULT STDMETHODCALLTYPE Initialize(
-        /* [in] */ __RPC__in HWND hwnd) = 0;
-
-};
+#include <Windows.ApplicationModel.DataTransfer.h>
 
 using namespace winrt;
 using namespace Windows::UI::Xaml;
@@ -25,12 +14,12 @@ namespace winrt::MyApp::implementation
     {
         InitializeComponent();
 
-        dataTransferManager = DataTransferManager::GetForCurrentView();
-        auto initWithWindow = dataTransferManager.as<IInitializeWithWindow>();
-        HWND mainWindow = reinterpret_cast<HWND>(mainFormInterop.WindowHandle());
-        initWithWindow->Initialize(mainWindow);
+        dtmInterop = winrt::get_activation_factory<DataTransferManager, IDataTransferManagerInterop>();
 
-        static auto ev = dataRequestedEventToken = dataTransferManager.DataRequested({ this, &MainUserControl::OnDataRequested });
+        HWND mainWindow = reinterpret_cast<HWND>(mainFormInterop.WindowHandle());
+        winrt::check_hresult(dtmInterop->GetForWindow(mainWindow, winrt::guid_of<ABI::Windows::ApplicationModel::DataTransfer::IDataTransferManager>(), winrt::put_abi(dataTransferManager)));
+
+        dataRequestedEventToken = dataTransferManager.DataRequested({ this, &MainUserControl::OnDataRequested });
     }
 
     void MainUserControl::OnDataRequested(DataTransferManager const& sender, DataRequestedEventArgs const& e)
@@ -48,7 +37,8 @@ namespace winrt::MyApp::implementation
 
     void MainUserControl::OnShare(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e)
     {
-        dataTransferManager.ShowShareUI();
+        HWND mainWindow = reinterpret_cast<HWND>(mainFormInterop.WindowHandle());
+        winrt::check_hresult(dtmInterop->ShowShareUIForWindow(mainWindow));
     }
 
 }
