@@ -27,6 +27,7 @@ namespace winrt::MyApp::implementation
     struct MainUserControl : MainUserControlT<MainUserControl>
     {
         MainUserControl(winrt::Contoso::Interop::IMainFormInterop interop);
+        ~MainUserControl();
 
         void OnGotoWeb(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e);
         void OnShare(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const& e);

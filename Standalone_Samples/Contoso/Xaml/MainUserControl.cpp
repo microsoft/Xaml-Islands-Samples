@@ -22,6 +22,12 @@ namespace winrt::MyApp::implementation
         dataRequestedEventToken = dataTransferManager.DataRequested({ this, &MainUserControl::OnDataRequested });
     }
 
+    MainUserControl::~MainUserControl()
+    {
+        dataTransferManager.DataRequested(dataRequestedEventToken);
+    }
+
+
     void MainUserControl::OnDataRequested(DataTransferManager const& sender, DataRequestedEventArgs const& e)
     {
         auto request = e.Request();
