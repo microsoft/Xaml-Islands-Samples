@@ -8,7 +8,14 @@ namespace Samples.ManagedUWP
     {
         public MainPage()
         {
-            this.InitializeComponent();
+            try
+            {
+                this.InitializeComponent();
+            }
+            catch
+            {
+                this.InitializeComponent();
+            }
             contentFrame.Navigate(typeof(WelcomePage), null);
         }
 
