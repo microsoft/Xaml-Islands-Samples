@@ -10,7 +10,7 @@
   <Identity
     Name="b031ef7b-fbca-43ce-a4c7-d6b4ff6b346e"
     Publisher="CN=Microsoft-Test"
-    Version="1.0.6.0" />
+    Version="1.0.7.0" />
 
   <Properties>
     <DisplayName>Package</DisplayName>
@@ -46,7 +46,5 @@
   <Capabilities>
     <Capability Name="internetClient" />
     <rescap:Capability Name="runFullTrust" />
-    <Capability Name="internetClientServer"/>
-    <uap4:Capability Name="userDataTasks"/>
   </Capabilities>
 </Package>
