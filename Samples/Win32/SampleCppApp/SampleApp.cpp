@@ -107,10 +107,10 @@ private:
         const auto dpi = static_cast<int>(scaleFactor) / 100.0f;
 
 
-        m_managedControl = winrt::SampleLibraryCS::CustomUserControl();
-        m_managedControl.Height(ButtonHeight / dpi);
-        m_managedControl.Width(ButtonWidth / dpi);
-        m_hWndXamlButton1 = wil::unique_hwnd(CreateDesktopWindowsXamlSource(WS_TABSTOP, m_managedControl));
+        //m_managedControl = winrt::SampleLibraryCS::CustomUserControl();
+        //m_managedControl.Height(ButtonHeight / dpi);
+        //m_managedControl.Width(ButtonWidth / dpi);
+        //m_hWndXamlButton1 = wil::unique_hwnd(CreateDesktopWindowsXamlSource(WS_TABSTOP, m_managedControl));
 
         //m_xamlBt1 = LoadXamlControl<winrt::Windows::UI::Xaml::Controls::Button>(IDR_XAML_BUTTON1);
         //m_xamlBt1.Height(ButtonHeight / dpi);

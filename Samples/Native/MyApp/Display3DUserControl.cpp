@@ -8,7 +8,9 @@ using namespace Windows::Foundation;
 using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Composition;
 using namespace Windows::UI::Xaml::Hosting;
+#ifdef __SCENE_LOADER__
 using namespace winrt::SceneLoaderComponent;
+#endif
 using namespace Windows::Foundation::Numerics;
 using namespace winrt::Windows::UI::Composition::Scenes;
 using namespace Windows::UI::Xaml::Controls;
@@ -21,8 +23,10 @@ namespace winrt::MyApp::implementation
 		
 		Uri uri{ modelPath };
 		auto buffer{ co_await FileIO::ReadBufferAsync(co_await StorageFile::GetFileFromApplicationUriAsync(uri)) };
+#ifdef __SCENE_LOADER__
 		auto loader = SceneLoader{};
 		auto sceneNode = loader.Load(buffer, _compositor);
+#endif
 
 		_hostVisual.RelativeSizeAdjustment(Numerics::float2().one());
 
@@ -31,7 +35,9 @@ namespace winrt::MyApp::implementation
 		_sceneVisual.Scale(float3(2.5f, 2.5f, 1.0f));
 		_sceneVisual.Root(SceneNode::Create(_compositor));
 		_sceneVisual.Root().Children().Clear();
+#ifdef __SCENE_LOADER__
 		_sceneVisual.Root().Children().Append(sceneNode);
+#endif // __SCENE_LOADER__
 
 		auto rotationAnimation = _compositor.CreateScalarKeyFrameAnimation();
 		rotationAnimation.InsertKeyFrame(1.0f, 360.0f, _compositor.CreateLinearEasingFunction());

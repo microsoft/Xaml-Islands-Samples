@@ -31,9 +31,14 @@
 #include <winrt/Microsoft.UI.Xaml.Controls.Primitives.h>
 #include <winrt/Microsoft.UI.Xaml.XamlTypeInfo.h>
 
+#ifdef __SCENE_LOADER__
 #include <winrt/SceneLoaderComponent.h>
+#endif
 
 #include <winrt/SampleUserControl.h>
 #include <winrt/SampleLibraryCS.h>
 #include <winrt/SampleLibraryCS.SampleLibraryCS_XamlTypeInfo.h>
 
+#include <vector>
+#include <algorithm>
+#include <iterator>
