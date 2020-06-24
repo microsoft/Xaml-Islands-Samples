@@ -14,12 +14,15 @@ namespace winrt::MyApp::implementation
     {
         InitializeComponent();
 
-        dtmInterop = winrt::get_activation_factory<DataTransferManager, IDataTransferManagerInterop>();
+        if (interop)
+        {
+            dtmInterop = winrt::get_activation_factory<DataTransferManager, IDataTransferManagerInterop>();
 
-        HWND mainWindow = reinterpret_cast<HWND>(mainFormInterop.WindowHandle());
-        winrt::check_hresult(dtmInterop->GetForWindow(mainWindow, winrt::guid_of<ABI::Windows::ApplicationModel::DataTransfer::IDataTransferManager>(), winrt::put_abi(dataTransferManager)));
+            HWND mainWindow = reinterpret_cast<HWND>(mainFormInterop.WindowHandle());
+            winrt::check_hresult(dtmInterop->GetForWindow(mainWindow, winrt::guid_of<ABI::Windows::ApplicationModel::DataTransfer::IDataTransferManager>(), winrt::put_abi(dataTransferManager)));
 
-        dataRequestedEventToken = dataTransferManager.DataRequested({ this, &MainUserControl::OnDataRequested });
+            dataRequestedEventToken = dataTransferManager.DataRequested({ this, &MainUserControl::OnDataRequested });
+        }
     }
 
     MainUserControl::~MainUserControl()
