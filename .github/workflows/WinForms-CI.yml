@@ -59,7 +59,7 @@ jobs:
     env:
       Solution_Name: WinForms_XAMLIslands_v1.sln                # Replace with your solution name, i.e. MyWpfApp.sln.
       Wap_Project_Directory: Samples\WPF\WAP                    # Replace with the Wap project directory relative to the solution, i.e. MyWpfApp.Package.
-      Wap_Project_Path: WAP.wapproj                             # Replace with the path to your Wap project, i.e. MyWpf.App.Package\MyWpfApp.Package.wapproj.
+      Wap_Project_Path: Samples\WPF\WAP\WAP.wapproj             # Replace with the path to your Wap project, i.e. MyWpf.App.Package\MyWpfApp.Package.wapproj.
 
     steps:
     - name: Checkout
