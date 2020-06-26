@@ -6,6 +6,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <Platforms>x64;x86</Platforms>
     <AssetTargetFallback>uap10.0.18362</AssetTargetFallback>
+    <RuntimeIdentifiers>win10-x86-aot</RuntimeIdentifiers>
   </PropertyGroup>
 
   <ItemGroup>
