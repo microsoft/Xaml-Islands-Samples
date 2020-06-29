@@ -18,6 +18,7 @@
     <WindowsTargetPlatformMinVersion>10.0.18362.0</WindowsTargetPlatformMinVersion>
     <CppWinRTVerbosity>high</CppWinRTVerbosity>
     <AppxPackageSigningEnabled>false</AppxPackageSigningEnabled>
+    <RuntimeIdentifiers>win10-x86-aot</RuntimeIdentifiers>
   </PropertyGroup>
   <PropertyGroup Label="Globals">
     <WindowsAppContainer>true</WindowsAppContainer>
