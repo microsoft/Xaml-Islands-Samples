@@ -17,15 +17,4 @@
         threadingModel="both"
         xmlns="urn:schemas-microsoft-com:winrt.v1" />
   </asmv3:file>
-  <asmv3:file name="UWPShim.exe"/>
-  <asmv3:file name="CLRHost.dll">
-      <activatableClass
-        name='SampleLibraryCS.CustomUserControl'
-        threadingModel='both'
-        xmlns='urn:schemas-microsoft-com:winrt.v1'/>
-    <activatableClass
-        name='SampleLibraryCS.SampleLibraryCS_XamlTypeInfo.XamlMetaDataProvider'
-        threadingModel='both'
-        xmlns='urn:schemas-microsoft-com:winrt.v1'/>
-  </asmv3:file>
 </assembly>

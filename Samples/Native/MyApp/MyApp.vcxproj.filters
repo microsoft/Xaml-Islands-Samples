@@ -38,6 +38,8 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="dummy.exe" />
+    <None Include="SampleLibraryCS.dll" />
+    <None Include="SampleLibraryCS.runtimeconfig.json" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Images">

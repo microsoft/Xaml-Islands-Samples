@@ -18,6 +18,7 @@
     <WindowsTargetPlatformMinVersion>10.0.18362.0</WindowsTargetPlatformMinVersion>
     <CppWinRTVerbosity>high</CppWinRTVerbosity>
     <AppxPackageSigningEnabled>false</AppxPackageSigningEnabled>
+    <ManagedWinmdInprocImplementation>SampleLibraryCS.dll</ManagedWinmdInprocImplementation>
   </PropertyGroup>
   <PropertyGroup Label="Globals">
     <WindowsAppContainer>true</WindowsAppContainer>
@@ -203,6 +204,12 @@
       <DeploymentContent>true</DeploymentContent>
     </None>
     <None Include="packages.config" />
+    <None Include="SampleLibraryCS.dll">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="SampleLibraryCS.runtimeconfig.json">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Images\LockScreenLogo.scale-200.png" />
