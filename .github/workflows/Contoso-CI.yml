@@ -57,9 +57,9 @@ jobs:
                              # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
 
     env:
-      Solution_Name: NativeXamlIslands.sln                                                   # Replace with your solution name, i.e. MyWpfApp.sln.
-      Wap_Project_Directory: Samples\Win32\SampleCppApp.Package                              # Replace with the Wap project directory relative to the solution, i.e. MyWpfApp.Package.
-      Wap_Project_Path: Samples\Win32\SampleCppApp.Package\SampleCppApp.Package.wapproj      # Replace with the path to your Wap project, i.e. MyWpf.App.Package\MyWpfApp.Package.wapproj.
+      Solution_Name: Standalone_Samples\Contoso\Contoso.sln   # Replace with your solution name, i.e. MyWpfApp.sln.
+      Wap_Project_Directory: Package                          # Replace with the Wap project directory relative to the solution, i.e. MyWpfApp.Package.
+      Wap_Project_Path: Standalone_Samples\Contoso\Package\Contoso.Package.wapproj       # Replace with the path to your Wap project, i.e. MyWpf.App.Package\MyWpfApp.Package.wapproj.
 
     steps:
     - name: Checkout
@@ -113,5 +113,5 @@ jobs:
     - name: Upload build artifacts
       uses: actions/upload-artifact@v1
       with:
-        name: CPP-Sample
+        name: Contoso-Sample
         path: ${{ env.Wap_Project_Directory }}\AppPackages
