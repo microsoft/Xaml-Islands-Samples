@@ -4,6 +4,11 @@
 
 #include <windows.h>
 #include <unknwn.h>
+
+#include <vector>
+#include <algorithm>
+#include <iterator>
+
 #include <restrictederrorinfo.h>
 #include <hstring.h>
 #include <winrt/base.h>
