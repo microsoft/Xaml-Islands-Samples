@@ -113,5 +113,5 @@ jobs:
     - name: Upload build artifacts
       uses: actions/upload-artifact@v1
       with:
-        name: MSIX Package
+        name: WinForms-Sample
         path: ${{ env.Wap_Project_Directory }}\AppPackages
