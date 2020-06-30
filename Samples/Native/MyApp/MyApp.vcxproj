@@ -24,6 +24,7 @@
     <AppxGeneratePriEnabled>true</AppxGeneratePriEnabled>
     <ProjectPriIndexName>App</ProjectPriIndexName>
     <AppxPackage>true</AppxPackage>
+    <RuntimeIdentifiers>win10-arm64;win10-x86;win10-x64</RuntimeIdentifiers>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <ItemGroup Label="ProjectConfigurations">

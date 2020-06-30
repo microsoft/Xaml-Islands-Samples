@@ -95,12 +95,6 @@
       <TargetedSDKArchitecture>$(PlatformShortName)</TargetedSDKArchitecture>
       <Implicit>true</Implicit>
     </SDKReference>
-    <SDKReference Include="Microsoft.NET.CoreRuntime,Version=1.1">
-      <TargetedSDKConfiguration Condition="'$(Configuration)'!='Debug'">Retail</TargetedSDKConfiguration>
-      <TargetedSDKConfiguration Condition="'$(Configuration)'=='Debug'">Debug</TargetedSDKConfiguration>
-      <TargetedSDKArchitecture>$(PlatformShortName)</TargetedSDKArchitecture>
-      <Implicit>true</Implicit>
-    </SDKReference>
   </ItemGroup>
   <Import Project="$(WapProjPath)\Microsoft.DesktopBridge.targets" />
   <Target Name="_StompSourceProjectForWapProject" BeforeTargets="_ConvertItems">
