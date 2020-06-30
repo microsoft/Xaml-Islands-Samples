@@ -18,7 +18,6 @@
     <WindowsTargetPlatformMinVersion>10.0.18362.0</WindowsTargetPlatformMinVersion>
     <CppWinRTVerbosity>high</CppWinRTVerbosity>
     <AppxPackageSigningEnabled>false</AppxPackageSigningEnabled>
-    <ManagedWinmdInprocImplementation>SampleLibraryCS.dll</ManagedWinmdInprocImplementation>
   </PropertyGroup>
   <PropertyGroup Label="Globals">
     <WindowsAppContainer>true</WindowsAppContainer>
@@ -204,12 +203,34 @@
       <DeploymentContent>true</DeploymentContent>
     </None>
     <None Include="packages.config" />
-    <None Include="SampleLibraryCS.dll">
-      <DeploymentContent>true</DeploymentContent>
-    </None>
-    <None Include="SampleLibraryCS.runtimeconfig.json">
-      <DeploymentContent>true</DeploymentContent>
-    </None>
+  </ItemGroup>
+  <PropertyGroup>
+    <ManagedWinmdInprocName>SampleLibraryCS</ManagedWinmdInprocName>
+    <ManagedWinmdInprocImplementation>$(ManagedWinmdInprocName).dll</ManagedWinmdInprocImplementation>
+  </PropertyGroup>
+  <ItemGroup>
+    <ReferenceCopyLocalPath Include="@(WinRTHost->'$(ManagedWinmdInprocImplementation)')">
+      <DestinationSubFolder>.</DestinationSubFolder>
+    </ReferenceCopyLocalPath>
+    <ReferenceCopyLocalPath Include="@(WinRTHostConfig->'$(ManagedWinmdInprocName).runtimeconfig.json')">
+      <DestinationSubFolder>.</DestinationSubFolder>
+    </ReferenceCopyLocalPath>
+    <Reference Include="$(ManagedWinmdInprocName).winmd">
+      <HintPath>..\..\Managed\$(ManagedWinmdInprocName)\bin\$(Platform)\$(Configuration)\$(ManagedWinmdInprocName).winmd</HintPath>
+      <IsWinMDFile>true</IsWinMDFile>
+    </Reference>
+  </ItemGroup>
+  <Target Name="SetupWinRTHost" AfterTargets="ResolveReferences">
+    <ItemGroup>
+      <WinRTHost Include="WinRTHost\$(Platform)\winrthost.dll" />
+      <WinRTHostConfig Include="WinRTHost\RuntimeConfig.json"/>
+    </ItemGroup>
+    <Copy SourceFiles="@(WinRTHost)" DestinationFiles="@(WinRTHost->'$(IntDir)\$(ManagedWinmdInprocImplementation)')" />
+    <Copy SourceFiles="@(WinRTHostConfig)" DestinationFiles="@(WinRTHostConfig->'$(IntDir)\$(ManagedWinmdInprocName).runtimeconfig.json')" />
+  </Target>
+  <ItemGroup>
+    <ReferenceCopyLocalPaths Include="$(IntDir)\$(ManagedWinmdInprocImplementation)"/>
+    <ReferenceCopyLocalPaths Include="$(IntDir)\$(ManagedWinmdInprocName).runtimeconfig.json"/>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Images\LockScreenLogo.scale-200.png" />
@@ -308,10 +329,6 @@
     <!-- HACK BEGIN -->
     <Reference Include="SceneLoaderComponent" Condition="'$(Platform)'=='x64'">
       <HintPath>..\..\..\packages\SceneLoaderComponent.1.0.0-build.5\lib\uap10.0\SceneLoaderComponent.winmd</HintPath>
-      <IsWinMDFile>true</IsWinMDFile>
-    </Reference>
-    <Reference Include="SampleLibraryCS.winmd">
-      <HintPath>..\..\Managed\SampleLibraryCS\bin\$(Platform)\$(Configuration)\SampleLibraryCS.winmd</HintPath>
       <IsWinMDFile>true</IsWinMDFile>
     </Reference>
     <!-- HACK END -->
