@@ -208,6 +208,8 @@
   <PropertyGroup>
     <ManagedWinmdInprocName>SampleLibraryCS</ManagedWinmdInprocName>
     <ManagedWinmdInprocImplementation>$(ManagedWinmdInprocName).dll</ManagedWinmdInprocImplementation>
+    <_PlatformShortName>$(Platform)</_PlatformShortName>
+    <_PlatformShortName Condition="'$(Platform)'=='Win32'">x86</_PlatformShortName>
   </PropertyGroup>
   <ItemGroup>
     <ReferenceCopyLocalPath Include="@(WinRTHost->'$(ManagedWinmdInprocImplementation)')">
@@ -217,13 +219,13 @@
       <DestinationSubFolder>.</DestinationSubFolder>
     </ReferenceCopyLocalPath>
     <Reference Include="$(ManagedWinmdInprocName).winmd">
-      <HintPath>..\..\Managed\$(ManagedWinmdInprocName)\bin\$(Platform)\$(Configuration)\$(ManagedWinmdInprocName).winmd</HintPath>
+      <HintPath>..\..\Managed\$(ManagedWinmdInprocName)\bin\$(_PlatformShortName)\$(Configuration)\$(ManagedWinmdInprocName).winmd</HintPath>
       <IsWinMDFile>true</IsWinMDFile>
     </Reference>
   </ItemGroup>
   <Target Name="SetupWinRTHost" AfterTargets="ResolveReferences">
     <ItemGroup>
-      <WinRTHost Include="WinRTHost\$(Platform)\winrthost.dll" />
+      <WinRTHost Include="WinRTHost\$(_PlatformShortName)\winrthost.dll" />
       <WinRTHostConfig Include="WinRTHost\RuntimeConfig.json"/>
     </ItemGroup>
     <Copy SourceFiles="@(WinRTHost)" DestinationFiles="@(WinRTHost->'$(IntDir)\$(ManagedWinmdInprocImplementation)')" />
