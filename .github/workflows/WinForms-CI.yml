@@ -100,6 +100,7 @@ jobs:
         Appx_Bundle_Platforms: x64|x86
         Appx_Package_Build_Mode: StoreUpload
         Configuration: ${{ matrix.configuration }}
+        Platform: ${{ matrix.platform }}
         AppInstallerUri: https://msdn.microsoft.com 
 
     # Remove the pfx
