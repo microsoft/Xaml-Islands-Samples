@@ -120,5 +120,5 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: WinForms-MSBuildLogs
-        path: '**/*.binlog'
+        path: '*.binlog'
 
