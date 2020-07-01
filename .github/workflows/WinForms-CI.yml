@@ -110,13 +110,10 @@ jobs:
         Remove-Item -path $certificatePath
 
     - name: Upload msbuild log
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v2
       with:
         name: WinForms-MSBuildLogs
-        path: wap.${{ env.Configuration }}.${{ env.Platform }}.binlog
-      env:
-        Configuration: ${{ matrix.configuration }}
-        Platform: ${{ matrix.platform }}
+        path: '**/*.binlog'
 
     # Upload the MSIX package: https://github.com/marketplace/actions/upload-artifact
     - name: Upload build artifacts
