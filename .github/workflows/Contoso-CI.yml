@@ -113,7 +113,7 @@ jobs:
     - name: Upload msbuild log
       uses: actions/upload-artifact@v2
       with:
-        name: WinForms-MSBuildLogs
+        name: Contoso-MSBuildLogs
         path: '**/*.binlog'
 
     # Upload the MSIX package: https://github.com/marketplace/actions/upload-artifact
