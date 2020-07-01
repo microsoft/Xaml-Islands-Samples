@@ -114,6 +114,9 @@ jobs:
       with:
         name: WinForms-MSBuildLogs
         path: wap.${{ env.Configuration }}.${{ env.Platform }}.binlog
+      env:
+        Configuration: ${{ matrix.configuration }}
+        Platform: ${{ matrix.platform }}
 
     # Upload the MSIX package: https://github.com/marketplace/actions/upload-artifact
     - name: Upload build artifacts
