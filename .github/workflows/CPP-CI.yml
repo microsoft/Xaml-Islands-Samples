@@ -115,7 +115,7 @@ jobs:
       with:
         name: CPP-MSBuildLogs
         path: '**/*.binlog'
-      if: succeeded() || failed()
+      continue-on-error: true
 
     # Upload the MSIX package: https://github.com/marketplace/actions/upload-artifact
     - name: Upload build artifacts
