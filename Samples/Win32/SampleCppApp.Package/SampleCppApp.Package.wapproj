@@ -48,6 +48,7 @@
     <AppInstallerUri>https://appconsultrealestate.z6.web.core.windows.net/</AppInstallerUri>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
     <PackageCertificateKeyFile>SampleCppApp.Package_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <AppxBundle>Always</AppxBundle>
