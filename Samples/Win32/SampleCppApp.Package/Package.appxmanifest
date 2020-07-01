@@ -8,8 +8,8 @@
 
   <Identity
     Name="99def245-f2b3-46c8-9d9d-2f4780e9e424"
-    Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US"
-    Version="1.0.13.0" />
+    Publisher="CN=Microsoft Corporation"
+    Version="1.0.15.0" />
 
   <Properties>
     <DisplayName>SampleCppApp.Package</DisplayName>
@@ -19,6 +19,7 @@
 
   <Dependencies>
     <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.14393.0" MaxVersionTested="10.0.14393.0" />
+    <PackageDependency Name="Microsoft.NET.CoreRuntime.1.1" MinVersion="1.1.27004.0" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
   </Dependencies>
 
   <Resources>

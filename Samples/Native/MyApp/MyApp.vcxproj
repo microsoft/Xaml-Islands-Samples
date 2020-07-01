@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\..\..\packages\SceneLoaderComponent.1.0.0.1\build\native\SceneLoaderComponent.props" Condition="Exists('..\..\..\packages\SceneLoaderComponent.1.0.0.1\build\native\SceneLoaderComponent.props')" />
+  <Import Project="..\..\..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.1.0\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.props" Condition="Exists('..\..\..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.1.0\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.props')" />
+  <Import Project="..\..\..\packages\SceneLoaderComponent.1.0.0.1\build\native\SceneLoaderComponent.props" Condition="'$(Platform)'=='x64' and Exists('..\..\..\packages\SceneLoaderComponent.1.0.0.1\build\native\SceneLoaderComponent.props')" />
   <Import Project="..\..\..\packages\Microsoft.Windows.CppWinRT.2.0.191111.2\build\native\Microsoft.Windows.CppWinRT.props" Condition="Exists('..\..\..\packages\Microsoft.Windows.CppWinRT.2.0.191111.2\build\native\Microsoft.Windows.CppWinRT.props')" />
-  <Import Project="..\..\..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.0.0\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.props" Condition="Exists('..\..\..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.0.0\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.props')" />
   <PropertyGroup Label="Globals">
     <CppWinRTEnabled>true</CppWinRTEnabled>
     <MinimalCoreWin>true</MinimalCoreWin>
@@ -25,9 +25,14 @@
     <AppxGeneratePriEnabled>true</AppxGeneratePriEnabled>
     <ProjectPriIndexName>App</ProjectPriIndexName>
     <AppxPackage>true</AppxPackage>
+    <RuntimeIdentifiers>win10-arm64;win10-x86;win10-x64</RuntimeIdentifiers>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|ARM64">
+      <Configuration>Debug</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
@@ -35,6 +40,10 @@
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
       <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ARM64">
+      <Configuration>Release</Configuration>
+      <Platform>ARM64</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
@@ -81,7 +90,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup>
@@ -99,37 +114,47 @@
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir);$(GeneratedFilesDir);$(IntDir);%(AppIncludeDirectories);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir);$(GeneratedFilesDir);$(IntDir);%(AppIncludeDirectories);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">$(ProjectDir);$(GeneratedFilesDir);$(IntDir);%(AppIncludeDirectories);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Midl>
       <MetadataFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)Unmerged\%(Filename).winmd</MetadataFileName>
     </Midl>
     <Midl>
       <MetadataFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)Unmerged\%(Filename).winmd</MetadataFileName>
+      <MetadataFileName Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">$(IntDir)Unmerged\%(Filename).winmd</MetadataFileName>
     </Midl>
     <Link>
       <OutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(OutDir)\$(TargetName)$(TargetExt)</OutputFile>
     </Link>
     <Link>
       <OutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)\$(TargetName)$(TargetExt)</OutputFile>
+      <OutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">$(OutDir)\$(TargetName)$(TargetExt)</OutputFile>
     </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Platform)'=='x64'">
+    <ClCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions);__SCENE_LOADER__</PreprocessorDefinitions>
+    </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)'=='Release'">
     <ClCompile>
-      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir);$(GeneratedFilesDir);$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir);$(GeneratedFilesDir);$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">$(ProjectDir);$(GeneratedFilesDir);$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Midl>
       <MetadataFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)Unmerged\%(Filename).winmd</MetadataFileName>
     </Midl>
     <Midl>
       <MetadataFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)Unmerged\%(Filename).winmd</MetadataFileName>
+      <MetadataFileName Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">$(IntDir)Unmerged\%(Filename).winmd</MetadataFileName>
     </Midl>
     <Link>
       <OutputFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(OutDir)\$(TargetName)$(TargetExt)</OutputFile>
     </Link>
     <Link>
       <OutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)\$(TargetName)$(TargetExt)</OutputFile>
+      <OutputFile Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">$(OutDir)\$(TargetName)$(TargetExt)</OutputFile>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -180,6 +205,36 @@
       <DeploymentContent>true</DeploymentContent>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <PropertyGroup>
+    <ManagedWinmdInprocName>SampleLibraryCS</ManagedWinmdInprocName>
+    <ManagedWinmdInprocImplementation>$(ManagedWinmdInprocName).dll</ManagedWinmdInprocImplementation>
+    <_PlatformShortName>$(Platform)</_PlatformShortName>
+    <_PlatformShortName Condition="'$(Platform)'=='Win32'">x86</_PlatformShortName>
+  </PropertyGroup>
+  <ItemGroup>
+    <ReferenceCopyLocalPath Include="@(WinRTHost->'$(ManagedWinmdInprocImplementation)')">
+      <DestinationSubFolder>.</DestinationSubFolder>
+    </ReferenceCopyLocalPath>
+    <ReferenceCopyLocalPath Include="@(WinRTHostConfig->'$(ManagedWinmdInprocName).runtimeconfig.json')">
+      <DestinationSubFolder>.</DestinationSubFolder>
+    </ReferenceCopyLocalPath>
+    <Reference Include="$(ManagedWinmdInprocName).winmd">
+      <HintPath>..\..\Managed\$(ManagedWinmdInprocName)\bin\$(_PlatformShortName)\$(Configuration)\$(ManagedWinmdInprocName).winmd</HintPath>
+      <IsWinMDFile>true</IsWinMDFile>
+    </Reference>
+  </ItemGroup>
+  <Target Name="SetupWinRTHost" AfterTargets="ResolveReferences">
+    <ItemGroup>
+      <WinRTHost Include="WinRTHost\$(_PlatformShortName)\winrthost.dll" />
+      <WinRTHostConfig Include="WinRTHost\RuntimeConfig.json" />
+    </ItemGroup>
+    <Copy SourceFiles="@(WinRTHost)" DestinationFiles="@(WinRTHost->'$(IntDir)\$(ManagedWinmdInprocImplementation)')" />
+    <Copy SourceFiles="@(WinRTHostConfig)" DestinationFiles="@(WinRTHostConfig->'$(IntDir)\$(ManagedWinmdInprocName).runtimeconfig.json')" />
+  </Target>
+  <ItemGroup>
+    <ReferenceCopyLocalPaths Include="$(IntDir)\$(ManagedWinmdInprocImplementation)" />
+    <ReferenceCopyLocalPaths Include="$(IntDir)\$(ManagedWinmdInprocName).runtimeconfig.json" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Images\LockScreenLogo.scale-200.png" />
@@ -276,15 +331,13 @@
   </ItemGroup>
   <ItemGroup>
     <!-- HACK BEGIN -->
-    <Reference Include="SceneLoaderComponent">
+    <Reference Include="SceneLoaderComponent" Condition="'$(Platform)'=='x64'">
       <HintPath>..\..\..\packages\SceneLoaderComponent.1.0.0-build.5\lib\uap10.0\SceneLoaderComponent.winmd</HintPath>
       <IsWinMDFile>true</IsWinMDFile>
     </Reference>
-    <Reference Include="SampleLibraryCS.winmd">
-      <HintPath>..\..\Managed\SampleLibraryCS\bin\x64\$(Configuration)\SampleLibraryCS.winmd</HintPath>
-      <IsWinMDFile>true</IsWinMDFile>
-    </Reference>
     <!-- HACK END -->
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\..\Managed\SampleLibraryCS\SampleLibraryCS.csproj">
       <Project>{92a2ac96-b414-455e-afe3-a6872591db93}</Project>
     </ProjectReference>
@@ -294,21 +347,21 @@
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
-    <Import Project="..\..\..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.0.0\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.targets" Condition="Exists('..\..\..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.0.0\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.targets')" />
     <Import Project="..\..\..\packages\Microsoft.UI.Xaml.2.3.191125001-prerelease\build\native\Microsoft.UI.Xaml.targets" Condition="Exists('..\..\..\packages\Microsoft.UI.Xaml.2.3.191125001-prerelease\build\native\Microsoft.UI.Xaml.targets')" />
     <Import Project="..\..\..\packages\Microsoft.Windows.CppWinRT.2.0.191111.2\build\native\Microsoft.Windows.CppWinRT.targets" Condition="Exists('..\..\..\packages\Microsoft.Windows.CppWinRT.2.0.191111.2\build\native\Microsoft.Windows.CppWinRT.targets')" />
-    <Import Project="..\..\..\packages\SceneLoaderComponent.1.0.0.1\build\native\SceneLoaderComponent.targets" Condition="Exists('..\..\..\packages\SceneLoaderComponent.1.0.0.1\build\native\SceneLoaderComponent.targets')" />
+    <Import Project="..\..\..\packages\SceneLoaderComponent.1.0.0.1\build\native\SceneLoaderComponent.targets" Condition="'$(Platform)'=='x64' and Exists('..\..\..\packages\SceneLoaderComponent.1.0.0.1\build\native\SceneLoaderComponent.targets')" />
+    <Import Project="..\..\..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.1.0\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.targets" Condition="Exists('..\..\..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.1.0\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\..\..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.0.0\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.0.0\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.props'))" />
-    <Error Condition="!Exists('..\..\..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.0.0\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.0.0\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.targets'))" />
     <Error Condition="!Exists('..\..\..\packages\Microsoft.UI.Xaml.2.3.191125001-prerelease\build\native\Microsoft.UI.Xaml.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Microsoft.UI.Xaml.2.3.191125001-prerelease\build\native\Microsoft.UI.Xaml.targets'))" />
     <Error Condition="!Exists('..\..\..\packages\Microsoft.Windows.CppWinRT.2.0.191111.2\build\native\Microsoft.Windows.CppWinRT.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Microsoft.Windows.CppWinRT.2.0.191111.2\build\native\Microsoft.Windows.CppWinRT.props'))" />
     <Error Condition="!Exists('..\..\..\packages\Microsoft.Windows.CppWinRT.2.0.191111.2\build\native\Microsoft.Windows.CppWinRT.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Microsoft.Windows.CppWinRT.2.0.191111.2\build\native\Microsoft.Windows.CppWinRT.targets'))" />
     <Error Condition="!Exists('..\..\..\packages\SceneLoaderComponent.1.0.0.1\build\native\SceneLoaderComponent.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\SceneLoaderComponent.1.0.0.1\build\native\SceneLoaderComponent.props'))" />
     <Error Condition="!Exists('..\..\..\packages\SceneLoaderComponent.1.0.0.1\build\native\SceneLoaderComponent.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\SceneLoaderComponent.1.0.0.1\build\native\SceneLoaderComponent.targets'))" />
+    <Error Condition="!Exists('..\..\..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.1.0\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.1.0\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.props'))" />
+    <Error Condition="!Exists('..\..\..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.1.0\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Microsoft.Toolkit.Win32.UI.XamlApplication.6.1.0\build\native\Microsoft.Toolkit.Win32.UI.XamlApplication.targets'))" />
   </Target>
 </Project>
