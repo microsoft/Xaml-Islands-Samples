@@ -212,6 +212,9 @@
     <_PlatformShortName>$(Platform)</_PlatformShortName>
     <_PlatformShortName Condition="'$(Platform)'=='Win32'">x86</_PlatformShortName>
   </PropertyGroup>
+  <PropertyGroup>
+    <HitPathManagedWinmd>..\..\Managed\SampleLibraryCS\bin\$(Platform)\$(Configuration)\$(ManagedWinmdInprocName).winmd</HitPathManagedWinmd>
+  </PropertyGroup>
   <ItemGroup>
     <ReferenceCopyLocalPath Include="@(WinRTHost->'$(ManagedWinmdInprocImplementation)')">
       <DestinationSubFolder>.</DestinationSubFolder>
@@ -220,7 +223,7 @@
       <DestinationSubFolder>.</DestinationSubFolder>
     </ReferenceCopyLocalPath>
     <Reference Include="$(ManagedWinmdInprocName).winmd">
-      <HintPath>..\..\Managed\$(ManagedWinmdInprocName)\bin\$(_PlatformShortName)\$(Configuration)\$(ManagedWinmdInprocName).winmd</HintPath>
+      <HintPath>$(HitPathManagedWinmd)</HintPath>
       <IsWinMDFile>true</IsWinMDFile>
     </Reference>
   </ItemGroup>

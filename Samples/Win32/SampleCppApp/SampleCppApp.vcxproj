@@ -143,7 +143,11 @@
     <AppProjectName>MyApp</AppProjectName>
   </PropertyGroup>
   <PropertyGroup>
-    <AppIncludeDirectories>$(SolutionDir)\obj\$(Platform)\$(Configuration)\$(AppProjectName)\;$(SolutionDir)\obj\$(Platform)\$(Configuration)\$(AppProjectName)\Generated Files\;</AppIncludeDirectories>
+    <!--
+    <AppIncludeDirectories>$(AppIncludeDirectories);$(SolutionDir)\obj\$(Platform)\$(Configuration)\$(AppProjectName)\;</AppIncludeDirectories>
+    -->
+    <AppIncludeDirectories>$(AppIncludeDirectories);$(SolutionDir)\obj\$(Platform)\$(Configuration)\$(AppProjectName)\Generated Files\;</AppIncludeDirectories>
+    <AppIncludeDirectories>$(AppIncludeDirectories);..\..\Native\$(AppProjectName)\obj\$(Platform)\$(Configuration)\$(AppProjectName)\Generated Files\;</AppIncludeDirectories>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Managed\SampleLibraryCS\SampleLibraryCS.csproj" />
