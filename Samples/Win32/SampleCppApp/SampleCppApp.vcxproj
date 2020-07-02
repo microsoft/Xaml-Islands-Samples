@@ -143,10 +143,10 @@
     <AppProjectName>MyApp</AppProjectName>
   </PropertyGroup>
   <PropertyGroup>
-    <!--
-    <AppIncludeDirectories>$(AppIncludeDirectories);$(SolutionDir)\obj\$(Platform)\$(Configuration)\$(AppProjectName)\;</AppIncludeDirectories>
-    -->
+    <_PlatformShortName>$(Platform)</_PlatformShortName>
+    <_PlatformShortName Condition="'$(Platform)'=='Win32'">x86</_PlatformShortName>
     <AppIncludeDirectories>$(AppIncludeDirectories);$(SolutionDir)\obj\$(Platform)\$(Configuration)\$(AppProjectName)\Generated Files\;</AppIncludeDirectories>
+    <AppIncludeDirectories>$(AppIncludeDirectories);..\..\Native\$(AppProjectName)\obj\$(_PlatformShortName)\$(Configuration)\$(AppProjectName)\Generated Files\;</AppIncludeDirectories>
     <AppIncludeDirectories>$(AppIncludeDirectories);..\..\Native\$(AppProjectName)\obj\$(Platform)\$(Configuration)\$(AppProjectName)\Generated Files\;</AppIncludeDirectories>
   </PropertyGroup>
   <ItemGroup>
