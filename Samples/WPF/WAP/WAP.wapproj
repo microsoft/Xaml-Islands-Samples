@@ -33,13 +33,11 @@
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
     <EntryPointProjectUniqueName>..\WPF_XAMLIslands_v1\WPF_XAMLIslands_v1.csproj</EntryPointProjectUniqueName>
     <GenerateAppInstallerFile>True</GenerateAppInstallerFile>
-    <PackageCertificateThumbprint>6ABF7736DF2AE0133EED51EF00F22A7AB4E177B7</PackageCertificateThumbprint>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <AppInstallerUri>https://mydomain.windows.net/</AppInstallerUri>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
-    <PackageCertificateKeyFile>F:\Repos\XamlIslands\1903_Hands_On_Labs\Exercise01\WPF_XAMLIslands_v1\WAP\WAP_TemporaryKey.pfx</PackageCertificateKeyFile>
     <AppxBundle>Never</AppxBundle>
   </PropertyGroup>
   <ItemGroup>
@@ -51,7 +49,6 @@
     <Content Include="..\XamlApplication\Images\*.png">
       <Link>Images\%(Filename)%(Extension)</Link>
     </Content>
-    <None Include="WAP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WPF_XAMLIslands_v1\WPF_XAMLIslands_v1.csproj">

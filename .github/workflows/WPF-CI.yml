@@ -36,7 +36,7 @@
 # For a complete CI/CD sample to get started with GitHub Action workflows for Desktop Applications,
 # refer to https://github.com/microsoft/github-actions-for-desktop-apps
 
-name: Contoso Sample
+name: WPF Sample
 
 on:
   push:
@@ -57,9 +57,9 @@ jobs:
                              # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
 
     env:
-      Solution_Name: Standalone_Samples\Contoso\Contoso.sln                              # Replace with your solution name, i.e. MyWpfApp.sln.
-      Wap_Project_Directory: Standalone_Samples\Contoso\Package                          # Replace with the Wap project directory relative to the solution, i.e. MyWpfApp.Package.
-      Wap_Project_Path: Standalone_Samples\Contoso\Package\Contoso.Package.wapproj       # Replace with the path to your Wap project, i.e. MyWpf.App.Package\MyWpfApp.Package.wapproj.
+      Solution_Name: WPF_XAMLIslands_v1.sln                # Replace with your solution name, i.e. MyWpfApp.sln.
+      Wap_Project_Directory: Samples\WPF\WAP               # Replace with the Wap project directory relative to the solution, i.e. MyWpfApp.Package.
+      Wap_Project_Path: Samples\WPF\WAP\WAP.wapproj        # Replace with the path to your Wap project, i.e. MyWpf.App.Package\MyWpfApp.Package.wapproj.
 
     steps:
     - name: Checkout
@@ -113,7 +113,7 @@ jobs:
     - name: Upload msbuild log
       uses: actions/upload-artifact@v2
       with:
-        name: Contoso-MSBuildLogs
+        name: WPF-MSBuildLogs
         path: '**/*.binlog'
       if: ${{ success() || failure() }}
 
@@ -121,5 +121,5 @@ jobs:
     - name: Upload build artifacts
       uses: actions/upload-artifact@v1
       with:
-        name: Contoso-Sample
+        name: WPF-Package
         path: ${{ env.Wap_Project_Directory }}\AppPackages

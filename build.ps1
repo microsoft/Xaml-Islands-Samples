@@ -13,8 +13,12 @@ param(
 if ($project -eq "WinForms")
 {
   $Solution_Name = "WinForms_XAMLIslands_v1.sln"
-  #$Wap_Project_Directory="Samples\WinForms\WAP"
   $Wap_Project_Path="Samples\WinForms\WAP\WAP.wapproj"
+}
+elseif ($project -eq "WPF")
+{
+  $Solution_Name = "WPF_XAMLIslands_v1.sln"
+  $Wap_Project_Path="Samples\WPF\WAP\WAP.wapproj"
 }
 elseif ($project -eq "Native")
 {
@@ -32,7 +36,11 @@ function build-internal()
   msbuild $Solution_Name /bl:logfile=restore.$project.$Configuration.$Platform.binlog /t:Restore /p:Configuration=$Configuration /p:Platform=$Platform /p:RuntimeIdentifiers=`"win-x64`;win-x86`;win10-x64-aot`;win10-x86-aot`"
   if (!$onlyRestore.IsPresent)
   {
-    rmdir .\Samples\Win32\SampleCppApp\obj\ -Force -Recurse
+    $objFolder = ".\Samples\Win32\SampleCppApp\obj\"
+    if (test-path $objFolder)
+    {
+      rmdir $objFolder -Force -Recurse
+    }
     msbuild $Wap_Project_Path /bl:logfile=$project.$Configuration.$Platform.binlog /t:$BuildAction /p:Configuration=$Configuration /p:Platform=$Platform /p:UapAppxPackageBuildMode=$Appx_Package_Build_Mode /p:AppxBundle=$Appx_Bundle /p:AppInstallerUri=$AppInstallerUri /p:RuntimeIdentifiers=`"win-x64`;win-x86`;win10-x64-aot`;win10-x86-aot`"
   }
 }
