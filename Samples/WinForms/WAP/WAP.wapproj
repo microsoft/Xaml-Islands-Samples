@@ -62,7 +62,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\CustomXamlApplication\Images\*.png">
+    <Content Include="..\..\Managed\MyApp\Images\*.png">
       <Link>Images\%(Filename)%(Extension)</Link>
     </Content>
   </ItemGroup>

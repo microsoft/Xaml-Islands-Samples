@@ -18,7 +18,7 @@ namespace WinForms_XAMLIslands_v1
         {
             InitializeComponent();
             this.windowsXamlHost = new Microsoft.Toolkit.Forms.UI.XamlHost.WindowsXamlHost();
-            this.windowsXamlHost.InitialTypeName = "MyClassLibrary.WelcomePage";
+            this.windowsXamlHost.Child = new MyClassLibrary.WelcomePage();
         
             this.windowsXamlHost.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowOnly;
             this.windowsXamlHost.Location = new System.Drawing.Point(0, 0);
