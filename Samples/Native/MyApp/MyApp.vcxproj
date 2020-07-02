@@ -213,7 +213,7 @@
     <_PlatformShortName Condition="'$(Platform)'=='Win32'">x86</_PlatformShortName>
   </PropertyGroup>
   <PropertyGroup>
-    <HitPathManagedWinmd>..\..\Managed\SampleLibraryCS\bin\$(Platform)\$(Configuration)\$(ManagedWinmdInprocName).winmd</HitPathManagedWinmd>
+    <HitPathManagedWinmd>..\..\Managed\SampleLibraryCS\bin\$(_PlatformShortName)\$(Configuration)\$(ManagedWinmdInprocName).winmd</HitPathManagedWinmd>
   </PropertyGroup>
   <ItemGroup>
     <ReferenceCopyLocalPath Include="@(WinRTHost->'$(ManagedWinmdInprocImplementation)')">
