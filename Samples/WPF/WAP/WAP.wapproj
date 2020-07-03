@@ -36,6 +36,7 @@
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
+    <AppxBundlePlatforms>x86|x64</AppxBundlePlatforms>
     <AppInstallerUri>https://mydomain.windows.net/</AppInstallerUri>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
     <AppxBundle>Never</AppxBundle>
@@ -46,7 +47,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\XamlApplication\Images\*.png">
+    <Content Include="..\..\Managed\UWPApplication\Images\*.png">
       <Link>Images\%(Filename)%(Extension)</Link>
     </Content>
   </ItemGroup>

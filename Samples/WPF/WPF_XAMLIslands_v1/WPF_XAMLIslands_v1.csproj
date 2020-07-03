@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
     <Platforms>x64;x86</Platforms>
     <StartupObject>WPF_XAMLIslands_v1.Program</StartupObject>
@@ -15,8 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Managed\MyClassLibrary\MyClassLibrary.csproj" />
-    <ProjectReference Include="..\..\Managed\MyApp\MyApp.csproj" />
+    <ProjectReference Include="..\..\Managed\Helpers\Helpers.csproj" />
+    <ProjectReference Include="..\..\Managed\UWPApplication\UWPApplication.csproj" />
   </ItemGroup>
 
 </Project>

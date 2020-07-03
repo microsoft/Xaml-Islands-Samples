@@ -8,6 +8,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <xaml:WindowsXamlHost InitialTypeName="MyClassLibrary.WelcomePage" />
+        <xaml:WindowsXamlHost InitialTypeName="Samples.ManagedUWP.MainPage" />
     </Grid>
 </Window>

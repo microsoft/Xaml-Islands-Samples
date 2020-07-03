@@ -1,4 +1,4 @@
-﻿namespace MyWinFormsApp
+﻿namespace WinForms_XAMLIslands_v1
 {
     partial class MainForm
     {

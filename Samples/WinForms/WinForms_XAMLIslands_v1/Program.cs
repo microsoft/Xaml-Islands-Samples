@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WinForms_XAMLIslands_v1
@@ -14,11 +11,11 @@ namespace WinForms_XAMLIslands_v1
         [STAThread]
         static void Main()
         {
-            using (new CustomXamlApplication.App())
+            using (new UWPApplication.App())
             {
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new Form1());
+                Application.Run(new MainForm());
             }
         }
     }

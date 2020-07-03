@@ -62,7 +62,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\Managed\MyApp\Images\*.png">
+    <Content Include="..\..\Managed\UWPApplication\Images\*.png">
       <Link>Images\%(Filename)%(Extension)</Link>
     </Content>
   </ItemGroup>
