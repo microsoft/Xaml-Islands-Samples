@@ -8,32 +8,15 @@ namespace WPF_XAMLIslands_v1
 {
     public static class Program
     {
-        enum StartupKind
-        {
-            Explict,
-            Normal,
-        };
-
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         public static void Main()
         {
-            var startupKind = StartupKind.Explict;
-
-            if (startupKind == StartupKind.Explict)
+            using (new UWPApplication.App())
             {
-                using (new CustomXamlApplication.App())
-                {
-                    var app = new WPF_XAMLIslands_v1.App();
-                    app.InitializeComponent();
-                    app.Run();
-                }
-            }
-            else
-            {
-                var app = new WPF_XAMLIslands_v1.App();
+                var app = new App();
                 app.InitializeComponent();
                 app.Run();
             }
