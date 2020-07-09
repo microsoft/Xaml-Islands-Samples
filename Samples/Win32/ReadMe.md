@@ -259,7 +259,7 @@ For example:
 
 It is recommended to separate each manifest file per component and have multiple manifest files:
 
-* [MyApp](/1903_Samples/CppWinRT_Win32_App/MyApp/MyApp.manifest)
-* [Microsoft UI Xaml](/1903_Samples/CppWinRT_Win32_App/SampleCppApp/Microsoft.UI.Xaml.manifest)
-* [Sample User Control](/1903_Samples/CppWinRT_Win32_App/SampleUserControl/SampleUserControl.manifest)
+* [MyApp](/Samples/Win32/MyApp/MyApp.manifest)
+* [Microsoft UI Xaml](/Samples/Win32/SampleCppApp/Microsoft.UI.Xaml.manifest)
+* [Sample User Control](/Samples/Win32/SampleUserControl/SampleUserControl.manifest)
 
