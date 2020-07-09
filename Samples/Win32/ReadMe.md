@@ -10,7 +10,7 @@ This is a complex native C++/WinRT sample to validate several features of XAML I
 * [Auto deployment of the Microsoft VC Libs](#VCLib)
 * [WinRT free class registration](#WinRT_Registration)
 
-![Screenshoot](/Samples/Win32/Screenshoot.PNG)
+![Screenshoot](/Samples/Win32/Screenshoot.png)
 ## Projects in the solution:
 
 * [Main Win32 Windows Application](/Samples/Win32/SampleCppApp/ReadMe.md)
