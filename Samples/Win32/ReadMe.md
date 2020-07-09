@@ -5,14 +5,12 @@
 This is a complex native C++/WinRT sample to validate several features of XAML Islands v1. 
 
 * [How to use the Keyboard input](#Keyboard)
-* [Generatie WinRT resources for Win32 apps](#Resources)
+* [Generate WinRT resources for Win32 apps](#Resources)
 * [How to consume custom third party types](#AppObject)
 * [Auto deployment of the Microsoft VC Libs](#VCLib)
 * [WinRT free class registration](#WinRT_Registration)
 
-This is how looks like this sample:
-
-![Screenshoot](/1903_Samples/CppWinRT_Win32_App/Screenshoot.PNG)
+![Screenshoot](https://github.com/marb2000/XamlIslands/blob/master/1903_Samples/CppWinRT_Win32_App/Screenshoot.PNG)
 ## Projects in the solution:
 
 * [Main Win32 Windows Application](/1903_Samples/CppWinRT_Win32_App/SampleCppApp/ReadMe.md)
