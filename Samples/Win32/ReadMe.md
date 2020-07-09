@@ -257,9 +257,3 @@ For example:
 </assembly>
 ```
 
-It is recommended to separate each manifest file per component and have multiple manifest files:
-
-* [MyApp](/Samples/Win32/MyApp/MyApp.manifest)
-* [Microsoft UI Xaml](/Samples/Win32/SampleCppApp/Microsoft.UI.Xaml.manifest)
-* [Sample User Control](/Samples/Win32/SampleUserControl/SampleUserControl.manifest)
-
