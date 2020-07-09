@@ -10,12 +10,12 @@ This is a complex native C++/WinRT sample to validate several features of XAML I
 * [Auto deployment of the Microsoft VC Libs](#VCLib)
 * [WinRT free class registration](#WinRT_Registration)
 
-![Screenshoot](https://github.com/marb2000/XamlIslands/blob/master/1903_Samples/CppWinRT_Win32_App/Screenshoot.PNG)
+![Screenshoot](Samples/Win32/Screenshoot.PNG)
 ## Projects in the solution:
 
-* [Main Win32 Windows Application](/1903_Samples/CppWinRT_Win32_App/SampleCppApp/ReadMe.md)
-* [UWP Application project](/1903_Samples/CppWinRT_Win32_App//MyApp/ReadMe.md)
-* [Sample 3rd party control](/1903_Samples/CppWinRT_Win32_App/SampleUserControl/ReadMe.md)
+* [Main Win32 Windows Application](/Samples/Win32/SampleCppApp/ReadMe.md)
+* [UWP Application project](/Samples/Win32//MyApp/ReadMe.md)
+* [Sample 3rd party control](/Samples/Win32/SampleUserControl/ReadMe.md)
 
 
 ## <a name="Keyboard"/> How to implement  the Keyboard input </a>
