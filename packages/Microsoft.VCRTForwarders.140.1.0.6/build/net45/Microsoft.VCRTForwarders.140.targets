@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <!-- Output folder for MSBuildForUnity -->
+    <VCRTForwarders-PackageDestinationFolder>$(MSBuildThisFileName)</VCRTForwarders-PackageDestinationFolder>
+    <VCRTForwarders-IncludeDebugCRT Condition="'$(VCRTForwarders-IncludeDebugCRT)$(Configuration)' == 'Debug'">true</VCRTForwarders-IncludeDebugCRT>
+    <_VCRTForwarders-Platform>$(Platform)</_VCRTForwarders-Platform>
+    <_VCRTForwarders-Platform Condition="'$(Platform)' == 'Win32'">x86</_VCRTForwarders-Platform>
+    <_VCRTForwarders-SupportedPlatform Condition="'$(_VCRTForwarders-Platform)' == 'x86' Or '$(_VCRTForwarders-Platform)' == 'x64' Or '$(_VCRTForwarders-Platform)' == 'arm64'">true</_VCRTForwarders-SupportedPlatform>
+    <ResolveReferencesDependsOn>
+      $(ResolveReferencesDependsOn);ResolveVCRTForwarderReferences;
+    </ResolveReferencesDependsOn>
+  </PropertyGroup>
+
+  <UsingTask TaskName="UseDebugCRT" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+    <ParameterGroup>
+      <ProjectFile ParameterType="System.String" Required="true" />
+      <Configuration ParameterType="System.String" Required="true" />
+      <Platform ParameterType="System.String" Required="true" />
+      <TaskOutput ParameterType="System.Boolean" Output="true" />
+    </ParameterGroup>
+    <Task>
+      <Reference Include="System.Xml"/>
+      <Reference Include="Microsoft.Build"/>
+      <Using Namespace="Microsoft.Build" />
+      <Using Namespace="Microsoft.Build.Evaluation" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+
+        var properties = new Dictionary<string, string>
+        {
+          { "Configuration", Configuration },
+          { "Platform", Platform }
+        };
+        
+        // Per MSDN, _DEBUG define can be checked to determine if debug CRT is in use.
+        var collection = new ProjectCollection(properties);
+        var project = collection.LoadProject(ProjectFile);
+        ProjectMetadata def = project.AllEvaluatedItemDefinitionMetadata
+                                     .LastOrDefault(p => p.ItemType == "ClCompile" && p.Name == "PreprocessorDefinitions");
+        Boolean useDebug = def != null && (";" + def.EvaluatedValue + ";").Contains(";_DEBUG;");
+
+        // There seem to be cases where even if _DEBUG is not found, debug CRT is used based on RuntimeLibrary.
+        if(!useDebug)
+        {
+          ProjectMetadata runtimeLibrary = project.AllEvaluatedItemDefinitionMetadata
+                                                  .LastOrDefault(p => p.ItemType == "ClCompile" && p.Name == "RuntimeLibrary");
+          useDebug = runtimeLibrary != null && (String.Compare(runtimeLibrary.EvaluatedValue, "MultiThreadedDebugDLL", true) == 0 ||
+                                                String.Compare(runtimeLibrary.EvaluatedValue, "MultiThreadedDebug", true) == 0);
+        }
+
+        TaskOutput = useDebug;
+        
+        ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+  
+  <Target Name="ResolveVCRTForwarderReferences">
+    <UseDebugCRT ProjectFile="%(ProjectReferenceWithConfiguration.Identity)"
+                 Configuration="%(ProjectReferenceWithConfiguration.Configuration)"
+                 Platform="%(ProjectReferenceWithConfiguration.Platform)"
+                 Condition="'@(ProjectReferenceWithConfiguration)' != '' And '$(VCRTForwarders-IncludeDebugCRT)' == ''">
+      <Output ItemName="TaskOutput" TaskParameter="TaskOutput"/>
+    </UseDebugCRT>
+    <PropertyGroup>
+      <VCRTForwarders-IncludeDebugCRT Condition="'%(TaskOutput.Identity)' == 'true'">true</VCRTForwarders-IncludeDebugCRT>
+    </PropertyGroup>
+    
+    <ItemGroup Condition="$(VCRTForwarders-IncludeDebugCRT) == true And $(_VCRTForwarders-SupportedPlatform) == true">
+      <ReferenceCopyLocalPaths Include="$(MSBuildThisFileDirectory)..\..\runtimes\win10-$(_VCRTForwarders-Platform)\native\debug\*.dll" />
+    </ItemGroup>
+    <ItemGroup Condition="$(_VCRTForwarders-SupportedPlatform) == true">
+      <ReferenceCopyLocalPaths Include="$(MSBuildThisFileDirectory)..\..\runtimes\win10-$(_VCRTForwarders-Platform)\native\release\*.dll" />
+    </ItemGroup>
+  </Target>
+
+  <!-- MSBuildForUnity support -->
+  <ItemGroup Condition="'$(MSBuildForUnityVersion)' != ''">
+    <Content Include="$(MSBuildThisFileDirectory)..\..\Unity\**">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <!-- Don't show .meta files in Solution Explorer - it's not useful. -->
+      <Visible Condition="'%(Extension)' == '.meta'">false</Visible>
+      <Link>$(VCRTForwarders-PackageDestinationFolder)\%(RecursiveDir)%(Filename)%(Extension)</Link>
+    </Content>
+  </ItemGroup>
+
+  <!--AnyCPU Not Supported -->
+  <Target Name="BeforeBuild" Condition="$(_VCRTForwarders-SupportedPlatform) != true" >
+        <Warning Text=" Because your app is being built as $(Platform) no Microsoft.VCRTForwarders.140 DLLs were copied to your ouput folder. Microsoft.VCRTForwarders.140 only supports x86, x64, or arm64 applications due to a C++ Runtime dependency. Please change your app project architecture to x86, x64, or arm64 in the Configuration Manager."/>
+  </Target>
+
+</Project>
