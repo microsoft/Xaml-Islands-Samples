@@ -39,11 +39,11 @@
     </ItemGroup>
     <Copy SourceFiles="@(WinRTHost)" DestinationFiles="@(WinRTHost->'$(ManagedWinmdInprocImplementation)')" />
     <CreateItem Include="@(WinRTHost->'$(ManagedWinmdInprocImplementation)')">
-      <Output TaskParameter="Include" ItemName="Content"/>
+      <Output TaskParameter="Include" ItemName="Content" />
     </CreateItem>
     <Copy SourceFiles="@(WinRTHostConfig)" DestinationFiles="@(WinRTHostConfig->'$(ManagedWinmdInprocName).runtimeconfig.json')" />
     <CreateItem Include="@(WinRTHostConfig->'$(ManagedWinmdInprocName).runtimeconfig.json')">
-      <Output TaskParameter="Include" ItemName="Content"/>
+      <Output TaskParameter="Include" ItemName="Content" />
     </CreateItem>
   </Target>
   <!--
@@ -313,7 +313,7 @@
       <Version>6.2.10</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Win32.UI.XamlApplication">
-      <Version>6.1.1</Version>
+      <Version>6.1.2</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml">
       <Version>2.4.0-prerelease.200113001</Version>
