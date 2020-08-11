@@ -40,6 +40,6 @@
                 <Frame x:Name="contentFrame"/>
             </ScrollViewer>
         </NavigationView>
-        <component:CustomControl Content="Custom Button" />
+        <component:CustomControl Grid.Row="1" Content="Custom Button" Margin="10,100" Height="50" Width="100" VerticalAlignment="Top" />
     </Grid>
 </UserControl>
