@@ -5,19 +5,17 @@
 This is a complex native C++/WinRT sample to validate several features of XAML Islands v1. 
 
 * [How to use the Keyboard input](#Keyboard)
-* [Generatie WinRT resources for Win32 apps](#Resources)
+* [Generate WinRT resources for Win32 apps](#Resources)
 * [How to consume custom third party types](#AppObject)
 * [Auto deployment of the Microsoft VC Libs](#VCLib)
 * [WinRT free class registration](#WinRT_Registration)
 
-This is how looks like this sample:
-
-![Screenshoot](/1903_Samples/CppWinRT_Win32_App/Screenshoot.PNG)
+![Screenshoot](/Samples/Win32/Screenshoot.png)
 ## Projects in the solution:
 
-* [Main Win32 Windows Application](/1903_Samples/CppWinRT_Win32_App/SampleCppApp/ReadMe.md)
-* [UWP Application project](/1903_Samples/CppWinRT_Win32_App//MyApp/ReadMe.md)
-* [Sample 3rd party control](/1903_Samples/CppWinRT_Win32_App/SampleUserControl/ReadMe.md)
+* [Main Win32 Windows Application](/Samples/Win32/SampleCppApp/ReadMe.md)
+* [UWP Application project](/Samples/Win32//MyApp/ReadMe.md)
+* [Sample 3rd party control](/Samples/Win32/SampleUserControl/ReadMe.md)
 
 
 ## <a name="Keyboard"/> How to implement  the Keyboard input </a>
@@ -258,10 +256,4 @@ For example:
     </asmv3:file>
 </assembly>
 ```
-
-It is recommended to separate each manifest file per component and have multiple manifest files:
-
-* [MyApp](/1903_Samples/CppWinRT_Win32_App/MyApp/MyApp.manifest)
-* [Microsoft UI Xaml](/1903_Samples/CppWinRT_Win32_App/SampleCppApp/Microsoft.UI.Xaml.manifest)
-* [Sample User Control](/1903_Samples/CppWinRT_Win32_App/SampleUserControl/SampleUserControl.manifest)
 
