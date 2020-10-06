@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:controls="using:Microsoft.UI.Xaml.Controls"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -13,13 +13,17 @@
         <TextBlock Text="Teaching Tip"  Style="{StaticResource SubtitleTextBlockStyle}" />
         <Button Content="Show TeachingTip" x:Name="showTeachingTipBtn"  Click="TestButtonClick" />
 
-        <controls:TeachingTip x:Name="toggleTeachingTipBtn"                   
+        <muxc:TeachingTip x:Name="toggleTeachingTipBtn"                   
 	                            Target="{x:Bind showTeachingTipBtn}"
 	                            Title="Use the TeachingTip control"                                        
 	                            Subtitle="It's easier than ever to see use a teaching tip">
-            <controls:TeachingTip.IconSource>
-                <controls:SymbolIconSource Symbol="Refresh" />
-            </controls:TeachingTip.IconSource>
-        </controls:TeachingTip>
+            <muxc:TeachingTip.IconSource>
+                <muxc:SymbolIconSource Symbol="Refresh" />
+            </muxc:TeachingTip.IconSource>
+        </muxc:TeachingTip>
+
+        <TextBlock Text="Number Box"  Style="{StaticResource SubtitleTextBlockStyle}" />
+        <muxc:NumberBox Header="Enter an expression:" Value="NaN" PlaceholderText="1 + 2^2" AcceptsExpression="True" />
+
     </StackPanel>
 </Page>
