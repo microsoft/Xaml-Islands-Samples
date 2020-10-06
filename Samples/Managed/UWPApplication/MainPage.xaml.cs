@@ -72,6 +72,9 @@ namespace Samples.ManagedUWP
                     case "Win32IntegrationPage":
                         pageType = typeof(Win32IntegrationPage);
                         break;
+                    case "WinUIPage":
+                        pageType = typeof(WinUIPage);
+                        break;
 
                 }
                 if (pageType != null)
