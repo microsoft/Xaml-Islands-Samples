@@ -60,6 +60,7 @@ jobs:
       Solution_Name: Standalone_Samples\Contoso\Contoso.sln                              # Replace with your solution name, i.e. MyWpfApp.sln.
       Wap_Project_Directory: Standalone_Samples\Contoso\Package                          # Replace with the Wap project directory relative to the solution, i.e. MyWpfApp.Package.
       Wap_Project_Path: Standalone_Samples\Contoso\Package\Contoso.Package.wapproj       # Replace with the path to your Wap project, i.e. MyWpf.App.Package\MyWpfApp.Package.wapproj.
+      ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 
     steps:
     - name: Checkout

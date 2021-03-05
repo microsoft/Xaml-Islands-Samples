@@ -60,6 +60,7 @@ jobs:
       Solution_Name: WinForms_XAMLIslands_v1.sln                # Replace with your solution name, i.e. MyWpfApp.sln.
       Wap_Project_Directory: Samples\WinForms\WAP               # Replace with the Wap project directory relative to the solution, i.e. MyWpfApp.Package.
       Wap_Project_Path: Samples\WinForms\WAP\WAP.wapproj        # Replace with the path to your Wap project, i.e. MyWpf.App.Package\MyWpfApp.Package.wapproj.
+      ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 
     steps:
     - name: Checkout
