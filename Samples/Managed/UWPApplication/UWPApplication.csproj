@@ -316,7 +316,7 @@
       <Version>6.1.2</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml">
-      <Version>2.5.0-prerelease.200923002</Version>
+      <Version>2.4.0-prerelease.200113001</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
@@ -329,6 +329,10 @@
     <ProjectReference Include="..\..\Native\Native_SwapChainPanel_Comp\Native_SwapChainPanel_Comp.vcxproj">
       <Project>{c3969d6c-706f-4aec-93a2-bf9d3c9c459c}</Project>
       <Name>Native_SwapChainPanel_Comp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UILibrary\UILibrary.csproj">
+      <Project>{2d221641-373c-4532-8bce-d9e251e123e3}</Project>
+      <Name>UILibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
