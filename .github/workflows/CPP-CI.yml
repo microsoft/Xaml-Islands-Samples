@@ -90,7 +90,7 @@ jobs:
     - name: Decode the pfx
       run: |
         $pfx_cert_byte = [System.Convert]::FromBase64String("${{ secrets.Base64_Encoded_Pfx }}")
-        $certificatePath = [System.IO.Path]::GetFullPath(Join-Path -Path $env:Wap_Project_Directory -ChildPath GitHubActionsWorkflow.pfx)
+        $certificatePath = [System.IO.Path]::GetFullPath( (Join-Path -Path $env:Wap_Project_Directory -ChildPath GitHubActionsWorkflow.pfx) )
         [IO.File]::WriteAllBytes("$certificatePath", $pfx_cert_byte)
         "PackageCertificateKeyFile=$certificatePath" | Out-File $env:GITHUB_ENV -Encoding utf8 -Append
         Write-Host PackageCertificateKeyFile=$certificatePath
