@@ -92,7 +92,7 @@ jobs:
     - name: Restore the application
       run: |
         msbuild $env:Solution_Name /bl:logfile=restore.$env:Configuration.$env:Platform.binlog /t:Restore /p:RestorePackagesConfig=true /p:Configuration=$env:Configuration /p:Platform=$env:Platform /p:RuntimeIdentifiers=`"win-x64`;win-x86`;win10-x64-aot`;win10-x86-aot`"
-        rmdir .\Samples\Win32\SampleCppApp\obj\ -Force -Recurse
+      # rmdir .\Samples\Win32\SampleCppApp\obj\ -Force -Recurse
       env:
         Configuration: ${{ matrix.configuration }}
         Platform: ${{ matrix.platform }}
