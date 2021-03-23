@@ -85,7 +85,7 @@ jobs:
         [IO.File]::WriteAllBytes("$certificatePath", $pfx_cert_byte)
         "PackageCertificateKeyFile=$certificatePath" | Out-File $env:GITHUB_ENV -Encoding utf8 -Append
         Write-Host PackageCertificateKeyFile=$certificatePath
-        & "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\TailoredProjectServices\VSCertificateChecker.exe" -f "$certificatePath"
+    # & "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\TailoredProjectServices\VSCertificateChecker.exe" -f "$certificatePath"
 
   
     # Restore the application to populate the obj folder with RuntimeIdentifiers
