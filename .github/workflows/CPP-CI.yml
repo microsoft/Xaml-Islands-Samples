@@ -94,6 +94,7 @@ jobs:
         [IO.File]::WriteAllBytes("$certificatePath", $pfx_cert_byte)
         "PackageCertificateKeyFile=$certificatePath" | Out-File $env:GITHUB_ENV -Encoding utf8 -Append
         Write-Host PackageCertificateKeyFile=$certificatePath
+        & "$env:VSINSTALLDIR\Common7\IDE\CommonExtensions\Microsoft\TailoredProjectServices\VSCertificateChecker.exe" -f "$certificatePath"
 
     - name: Print the path
       run: |
