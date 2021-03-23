@@ -97,7 +97,7 @@ jobs:
         Configuration: ${{ matrix.configuration }}
         Platform: ${{ matrix.platform }}
 
-  - name: Print the path
+    - name: Print the path
       run: |
         Write-Host Next task: PackageCertificateKeyFile=$env:PackageCertificateKeyFile
         
