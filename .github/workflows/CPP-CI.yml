@@ -77,15 +77,6 @@ jobs:
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v1.0.2
 
-    # Restore the application to populate the obj folder with RuntimeIdentifiers
-    - name: Restore the application
-      run: |
-        msbuild $env:Solution_Name /bl:logfile=restore.$env:Configuration.$env:Platform.binlog /t:Restore /p:Configuration=$env:Configuration /p:Platform=$env:Platform /p:RuntimeIdentifiers=`"win-x64`;win-x86`;win10-x64-aot`;win10-x86-aot`"
-        rmdir .\Samples\Win32\SampleCppApp\obj\ -Force -Recurse
-      env:
-        Configuration: ${{ matrix.configuration }}
-        Platform: ${{ matrix.platform }}
-
     # Decode the base 64 encoded pfx and save the Signing_Certificate
     - name: Decode the pfx
       run: |
@@ -96,7 +87,17 @@ jobs:
         Write-Host PackageCertificateKeyFile=$certificatePath
         & "$env:VSINSTALLDIR\Common7\IDE\CommonExtensions\Microsoft\TailoredProjectServices\VSCertificateChecker.exe" -f "$certificatePath"
 
-    - name: Print the path
+  
+    # Restore the application to populate the obj folder with RuntimeIdentifiers
+    - name: Restore the application
+      run: |
+        msbuild $env:Solution_Name /bl:logfile=restore.$env:Configuration.$env:Platform.binlog /t:Restore /p:Configuration=$env:Configuration /p:Platform=$env:Platform /p:RuntimeIdentifiers=`"win-x64`;win-x86`;win10-x64-aot`;win10-x86-aot`"
+        rmdir .\Samples\Win32\SampleCppApp\obj\ -Force -Recurse
+      env:
+        Configuration: ${{ matrix.configuration }}
+        Platform: ${{ matrix.platform }}
+
+  - name: Print the path
       run: |
         Write-Host Next task: PackageCertificateKeyFile=$env:PackageCertificateKeyFile
         
