@@ -8,7 +8,7 @@
 
   <Identity
     Name="99def245-f2b3-46c8-9d9d-2f4780e9e424"
-    Publisher="CN=Microsoft Corporation"
+    Publisher="CN=Xaml-Islands-Samples"
     Version="1.0.15.0" />
 
   <Properties>

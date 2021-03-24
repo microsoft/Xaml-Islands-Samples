@@ -75,28 +75,35 @@ jobs:
 
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
-      uses: microsoft/setup-msbuild@2008f912f56e61277eefaac6d1888b750582aa16
-
-    # Restore the application to populate the obj folder with RuntimeIdentifiers
-    - name: Restore the application
-      run: |
-        msbuild $env:Solution_Name /bl:logfile=restore.$env:Configuration.$env:Platform.binlog /t:Restore /p:Configuration=$env:Configuration /p:Platform=$env:Platform /p:RuntimeIdentifiers=`"win-x64`;win-x86`;win10-x64-aot`;win10-x86-aot`"
-        rmdir .\Samples\Win32\SampleCppApp\obj\ -Force -Recurse
-      env:
-        Configuration: ${{ matrix.configuration }}
-        Platform: ${{ matrix.platform }}
+      uses: microsoft/setup-msbuild@v1.0.2
 
     # Decode the base 64 encoded pfx and save the Signing_Certificate
     - name: Decode the pfx
       run: |
         $pfx_cert_byte = [System.Convert]::FromBase64String("${{ secrets.Base64_Encoded_Pfx }}")
-        $certificatePath = Join-Path -Path $env:Wap_Project_Directory -ChildPath GitHubActionsWorkflow.pfx
-        $env:__certificatePath__ = $certificatePath
+        $certificatePath = [System.IO.Path]::GetFullPath( (Join-Path -Path $env:Wap_Project_Directory -ChildPath GitHubActionsWorkflow.pfx) )
         [IO.File]::WriteAllBytes("$certificatePath", $pfx_cert_byte)
+        "PackageCertificateKeyFile=$certificatePath" | Out-File $env:GITHUB_ENV -Encoding utf8 -Append
+        Write-Host PackageCertificateKeyFile=$certificatePath
+    # & "${env:ProgramFiles(x86)}\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\CommonExtensions\Microsoft\TailoredProjectServices\VSCertificateChecker.exe" -f "$certificatePath"
 
+  
+    # Restore the application to populate the obj folder with RuntimeIdentifiers
+    - name: Restore the application
+      run: |
+        msbuild $env:Solution_Name /bl:logfile=restore.$env:Configuration.$env:Platform.binlog /t:Restore /p:RestorePackagesConfig=true /p:Configuration=$env:Configuration /p:Platform=$env:Platform /p:RuntimeIdentifiers=`"win-x64`;win-x86`;win10-x64-aot`;win10-x86-aot`"
+      # rmdir .\Samples\Win32\SampleCppApp\obj\ -Force -Recurse
+      env:
+        Configuration: ${{ matrix.configuration }}
+        Platform: ${{ matrix.platform }}
+
+    - name: Print the path
+      run: |
+        Write-Host Next task: PackageCertificateKeyFile=$env:PackageCertificateKeyFile
+        
     # Create the app package by building and packaging the Windows Application Packaging project
     - name: Create the app package
-      run: msbuild $env:Wap_Project_Path /bl:logfile=wap.$env:Configuration.$env:Platform.binlog /p:Configuration=$env:Configuration /p:UapAppxPackageBuildMode=$env:Appx_Package_Build_Mode /p:AppxBundle=$env:Appx_Bundle /p:PackageCertificateKeyFile=$env:__certificatePath__ /p:PackageCertificatePassword=${{ secrets.Pfx_Key }} /p:AppInstallerUri=$env:AppInstallerUri /p:RuntimeIdentifiers=`"win-x64`;win-x86`;win10-x64-aot`;win10-x86-aot`"
+      run: msbuild $env:Wap_Project_Path /bl:logfile=wap.$env:Configuration.$env:Platform.binlog /p:Configuration=$env:Configuration /p:UapAppxPackageBuildMode=$env:Appx_Package_Build_Mode /p:AppxBundle=$env:Appx_Bundle /p:PackageCertificatePassword=${{ secrets.Pfx_Key }} /p:AppInstallerUri=$env:AppInstallerUri /p:RuntimeIdentifiers=`"win-x64`;win-x86`;win10-x64-aot`;win10-x86-aot`"
       env:
         Appx_Bundle: Always
         Appx_Bundle_Platforms: x64|x86
