@@ -150,7 +150,6 @@
     <AppIncludeDirectories>$(AppIncludeDirectories);..\..\Native\$(AppProjectName)\obj\$(Platform)\$(Configuration)\$(AppProjectName)\Generated Files\;</AppIncludeDirectories>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Managed\SampleLibraryCS\SampleLibraryCS.csproj" />
     <ProjectReference Include="..\..\Native\SampleUserControl\SampleUserControl.vcxproj" />
     <ProjectReference Include="..\..\Native\$(AppProjectName)\$(AppProjectName).vcxproj" />
     <Manifest Include="Application.manifest" />

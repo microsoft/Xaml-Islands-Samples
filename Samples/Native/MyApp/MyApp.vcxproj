@@ -242,6 +242,7 @@
   <ItemGroup>
     <Image Include="Images\LockScreenLogo.scale-200.png" />
     <Image Include="Images\SplashScreen.scale-200.png" />
+    <Image Include="Images\SplashScreen.png" />
     <Image Include="Images\Square150x150Logo.scale-200.png" />
     <Image Include="Images\Square44x44Logo.scale-200.png" />
     <Image Include="Images\Square44x44Logo.targetsize-24_altform-unplated.png" />
@@ -341,9 +342,6 @@
     <!-- HACK END -->
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Managed\SampleLibraryCS\SampleLibraryCS.csproj">
-      <Project>{92a2ac96-b414-455e-afe3-a6872591db93}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\SampleUserControl\SampleUserControl.vcxproj">
       <Project>{b6b66dba-c720-4407-b490-6ae3fc2870fc}</Project>
     </ProjectReference>

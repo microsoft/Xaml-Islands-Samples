@@ -5,7 +5,6 @@
 #include "XamlBridge.h"
 #include <ShellScalingApi.h>
 #include <winrt/Microsoft.Toolkit.Win32.UI.XamlHost.h>
-#include <winrt/SampleLibraryCS.h>
 
 #define MAX_LOADSTRING 100
 
@@ -66,7 +65,6 @@ private:
     wil::unique_hwnd m_hWndXamlIsland = nullptr;
     wil::unique_hwnd m_hWndXamlButton1 = nullptr;
     winrt::MyApp::MainUserControl m_mainUserControl = nullptr;
-    winrt::SampleLibraryCS::CustomUserControl m_managedControl = nullptr;
     winrt::Windows::UI::Xaml::Controls::Button m_xamlBt1 = nullptr;
     winrt::Windows::UI::Xaml::Controls::Button::Click_revoker m_xamlBt1ClickEventRevoker;
 
@@ -105,12 +103,6 @@ private:
         DEVICE_SCALE_FACTOR scaleFactor = {};
         winrt::check_hresult(GetScaleFactorForMonitor(MonitorFromWindow(GetHandle(), 0), &scaleFactor));
         const auto dpi = static_cast<int>(scaleFactor) / 100.0f;
-
-
-        m_managedControl = winrt::SampleLibraryCS::CustomUserControl();
-        m_managedControl.Height(ButtonHeight / dpi);
-        m_managedControl.Width(ButtonWidth / dpi);
-        m_hWndXamlButton1 = wil::unique_hwnd(CreateDesktopWindowsXamlSource(WS_TABSTOP, m_managedControl));
 
         //m_xamlBt1 = LoadXamlControl<winrt::Windows::UI::Xaml::Controls::Button>(IDR_XAML_BUTTON1);
         //m_xamlBt1.Height(ButtonHeight / dpi);
