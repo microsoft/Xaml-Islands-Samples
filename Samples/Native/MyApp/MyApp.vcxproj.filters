@@ -31,6 +31,9 @@
     <Image Include="Images\Wide310x150Logo.scale-200.png">
       <Filter>Images</Filter>
     </Image>
+    <Image Include="Images\SplashScreen.png">
+      <Filter>Images</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest" />

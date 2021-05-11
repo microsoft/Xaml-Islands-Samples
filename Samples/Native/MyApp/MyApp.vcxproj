@@ -222,10 +222,6 @@
     <ReferenceCopyLocalPath Include="@(WinRTHostConfig->'$(ManagedWinmdInprocName).runtimeconfig.json')">
       <DestinationSubFolder>.</DestinationSubFolder>
     </ReferenceCopyLocalPath>
-    <Reference Include="$(ManagedWinmdInprocName).winmd">
-      <HintPath>$(HitPathManagedWinmd)</HintPath>
-      <IsWinMDFile>true</IsWinMDFile>
-    </Reference>
   </ItemGroup>
   <Target Name="SetupWinRTHost" AfterTargets="ResolveReferences">
     <ItemGroup>

@@ -81,7 +81,7 @@
     <ProjectReference Include="..\SampleCppApp\SampleCppApp.vcxproj" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\MyApp\Images\*.png">
+    <Content Include="..\..\Native\MyApp\Images\*.png">
       <Link>Images\%(Filename)%(Extension)</Link>
     </Content>
     <None Include="SampleCppApp.Package_TemporaryKey.pfx" />
