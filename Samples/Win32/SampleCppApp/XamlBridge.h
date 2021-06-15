@@ -13,20 +13,20 @@
 class DesktopWindow
 {
 protected:
-    int MessageLoop(HACCEL hAccelTable);
+    int MessageLoop(HACCEL accelerators);
     wil::unique_hwnd CreateDesktopWindowsXamlSource(DWORD extraStyles, winrt::Windows::UI::Xaml::UIElement content);
     void ClearXamlIslands();
 
     HWND WindowHandle() const
     {
-        return m_hMainWnd.get();
+        return m_window.get();
     }
 
     static void OnNCCreate(HWND window, LPARAM lparam) noexcept
     {
         auto cs = reinterpret_cast<CREATESTRUCT*>(lparam);
         auto that = static_cast<DesktopWindow*>(cs->lpCreateParams);
-        that->m_hMainWnd.reset(window); // take ownership of the window
+        that->m_window.reset(window); // take ownership of the window
         SetWindowLongPtrW(window, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(that));
     }
 
@@ -34,11 +34,11 @@ private:
     winrt::Windows::UI::Xaml::Hosting::DesktopWindowXamlSource GetFocusedIsland();
     bool FilterMessage(const MSG* msg);
     void OnTakeFocusRequested(winrt::Windows::UI::Xaml::Hosting::DesktopWindowXamlSource const& sender, winrt::Windows::UI::Xaml::Hosting::DesktopWindowXamlSourceTakeFocusRequestedEventArgs const& args);
-    winrt::Windows::UI::Xaml::Hosting::DesktopWindowXamlSource GetNextFocusedIsland(MSG* msg);
+    winrt::Windows::UI::Xaml::Hosting::DesktopWindowXamlSource GetNextFocusedIsland(const MSG* msg);
     bool NavigateFocus(MSG* msg);
 
-    wil::unique_hwnd m_hMainWnd;
-    winrt::guid lastFocusRequestId;
+    wil::unique_hwnd m_window;
+    winrt::guid m_lastFocusRequestId;
     std::vector<winrt::Windows::UI::Xaml::Hosting::DesktopWindowXamlSource::TakeFocusRequested_revoker> m_takeFocusEventRevokers;
     std::vector<winrt::Windows::UI::Xaml::Hosting::DesktopWindowXamlSource> m_xamlSources;
 };

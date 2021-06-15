@@ -84,15 +84,18 @@ private:
         winrt::check_hresult(GetScaleFactorForMonitor(MonitorFromWindow(WindowHandle(), 0), &scaleFactor));
         const auto dpi = static_cast<int>(scaleFactor) / 100.0f;
 
+#define LOAD_XAML_FROM_RESOURCE
+#ifdef LOAD_XAML_FROM_RESOURCE
         // Demonstrate loading Xaml from a Win32 resource
-        // m_xamlButton = LoadXamlControl<winrt::Windows::UI::Xaml::Controls::Button>(IDR_XAML_BUTTON1);
-        // m_xamlButton.Height(ButtonHeight / dpi);
-        // m_xamlButton.Width(ButtonWidth / dpi);
-        // m_buttonClickRevoker = m_xamlButton.Click(winrt::auto_revoke, { this, &AppWindow::OnXamlButtonClick });
-        // m_hWndXamlButton1 = wil::unique_hwnd(CreateDesktopWindowsXamlSource(WS_TABSTOP, m_xamlButton));
+        m_xamlButton = LoadXamlControl<winrt::Windows::UI::Xaml::Controls::Button>(IDR_XAML_BUTTON1);
+        m_xamlButton.Height(ButtonHeight / dpi);
+        m_xamlButton.Width(ButtonWidth / dpi);
+        m_buttonClickRevoker = m_xamlButton.Click(winrt::auto_revoke, { this, &AppWindow::OnXamlButtonClick });
+        m_xamlButton1 = CreateDesktopWindowsXamlSource(WS_TABSTOP, m_xamlButton);
+#endif
 
         m_mainUserControl = winrt::MyApp::MainUserControl();
-        m_hWndXamlIsland = CreateDesktopWindowsXamlSource(WS_TABSTOP, m_mainUserControl);
+        m_xamlIsland = CreateDesktopWindowsXamlSource(WS_TABSTOP, m_mainUserControl);
 
         m_button2 = wil::unique_hwnd(CreateWindowW(buttonClass, L"Button &2",
             WS_VISIBLE | WS_CHILD | BS_PUSHBUTTON | WS_TABSTOP,
@@ -135,7 +138,7 @@ private:
         case IDM_ButtonID2:
             if (m_mainUserControl)
             {
-                const auto string = (id == IDM_ButtonID1) ? winrt::hstring(L"Native button 1") : winrt::hstring(L"Native button 2");
+                const auto string = (id == IDM_ButtonID1) ? L"Native button 1" : L"Native button 2";
                 m_mainUserControl.MyProperty(string);
             }
             break;
@@ -155,9 +158,9 @@ private:
         const auto islandHeight = newHeight - (ButtonHeight * 2) - ButtonMargin;
         const auto islandWidth = newWidth - (ButtonMargin * 2);
         SetWindowPos(m_button1.get(), 0, ButtonWidth * 2, ButtonMargin, ButtonWidth, ButtonHeight, SWP_SHOWWINDOW);
-        SetWindowPos(m_hWndXamlButton1.get(), m_button1.get(), newWidth - (ButtonWidth * 2), ButtonMargin, ButtonWidth, ButtonHeight, SWP_SHOWWINDOW);
-        SetWindowPos(m_hWndXamlIsland.get(), m_hWndXamlButton1.get(), 0, XamlIslandMargin, islandWidth, islandHeight, SWP_SHOWWINDOW);
-        SetWindowPos(m_button2.get(), m_hWndXamlIsland.get(), (ButtonMargin + newWidth - ButtonWidth) / 2, newHeight - ButtonMargin - ButtonHeight, ButtonWidth, ButtonHeight, SWP_SHOWWINDOW);
+        SetWindowPos(m_xamlButton1.get(), m_button1.get(), newWidth - (ButtonWidth * 2), ButtonMargin, ButtonWidth, ButtonHeight, SWP_SHOWWINDOW);
+        SetWindowPos(m_xamlIsland.get(), m_xamlButton1.get(), 0, XamlIslandMargin, islandWidth, islandHeight, SWP_SHOWWINDOW);
+        SetWindowPos(m_button2.get(), m_xamlIsland.get(), (ButtonMargin + newWidth - ButtonWidth) / 2, newHeight - ButtonMargin - ButtonHeight, ButtonWidth, ButtonHeight, SWP_SHOWWINDOW);
     }
 
     void OnXamlButtonClick(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const&)
@@ -168,8 +171,8 @@ private:
     const HINSTANCE m_instance;
     wil::unique_hwnd m_button1;
     wil::unique_hwnd m_button2;
-    wil::unique_hwnd m_hWndXamlIsland;
-    wil::unique_hwnd m_hWndXamlButton1;
+    wil::unique_hwnd m_xamlIsland;
+    wil::unique_hwnd m_xamlButton1;
     wil::unique_haccel m_accelerators;
     winrt::MyApp::MainUserControl m_mainUserControl{ nullptr };
     winrt::Windows::UI::Xaml::Controls::Button m_xamlButton{nullptr};
