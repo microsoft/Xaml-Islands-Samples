@@ -5,24 +5,20 @@
 
 bool DesktopWindow::FilterMessage(const MSG* msg)
 {
-    // When multiple child windows are present it is needed to pre dispatch messages to all 
-    // DesktopWindowXamlSource instances so keyboard accelerators and 
+    // When multiple child windows are present it is needed to pre dispatch messages to all
+    // DesktopWindowXamlSource instances so keyboard accelerators and
     // keyboard focus work correctly.
-    BOOL xamlSourceProcessedMessage = FALSE;
+    for (auto& xamlSource : m_xamlSources)
     {
-        for (auto xamlSource : m_xamlSources)
+        BOOL xamlSourceProcessedMessage = FALSE;
+        winrt::check_hresult(xamlSource.as<IDesktopWindowXamlSourceNative2>()->PreTranslateMessage(msg, &xamlSourceProcessedMessage));
+        if (xamlSourceProcessedMessage != FALSE)
         {
-            auto xamlSourceNative2 = xamlSource.as<IDesktopWindowXamlSourceNative2>();
-            const auto hr = xamlSourceNative2->PreTranslateMessage(msg, &xamlSourceProcessedMessage);
-            winrt::check_hresult(hr);
-            if (xamlSourceProcessedMessage)
-            {
-                break;
-            }
+            return true;
         }
     }
 
-    return !!xamlSourceProcessedMessage;
+    return false;
 }
 
 const auto static invalidReason = static_cast<winrt::Windows::UI::Xaml::Hosting::XamlSourceFocusNavigationReason>(-1);
@@ -90,7 +86,7 @@ winrt::Windows::UI::Xaml::Hosting::DesktopWindowXamlSource DesktopWindow::GetNex
 
 winrt::Windows::UI::Xaml::Hosting::DesktopWindowXamlSource DesktopWindow::GetFocusedIsland()
 {
-    for (auto xamlSource : m_xamlSources)
+    for (auto& xamlSource : m_xamlSources)
     {
         if (xamlSource.HasFocus())
         {
@@ -139,16 +135,15 @@ bool DesktopWindow::NavigateFocus(MSG* msg)
 int DesktopWindow::MessageLoop(HACCEL hAccelTable)
 {
     MSG msg = {};
-    HRESULT hr = S_OK;
-    while (GetMessage(&msg, nullptr, 0, 0))
+    while (GetMessageW(&msg, nullptr, 0, 0))
     {
         const bool xamlSourceProcessedMessage = FilterMessage(&msg);
-        if (!xamlSourceProcessedMessage && !TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+        if (!xamlSourceProcessedMessage && !TranslateAcceleratorW(msg.hwnd, hAccelTable, &msg))
         {
             if (!NavigateFocus(&msg))
             {
                 TranslateMessage(&msg);
-                DispatchMessage(&msg);
+                DispatchMessageW(&msg);
             }
         }
     }
@@ -216,32 +211,26 @@ void DesktopWindow::OnTakeFocusRequested(winrt::Windows::UI::Xaml::Hosting::Desk
     }
 }
 
-HWND DesktopWindow::CreateDesktopWindowsXamlSource(DWORD dwStyle, winrt::Windows::UI::Xaml::UIElement content)
+wil::unique_hwnd DesktopWindow::CreateDesktopWindowsXamlSource(DWORD extraWindowStyles, winrt::Windows::UI::Xaml::UIElement content)
 {
-    HRESULT hr = S_OK;
-
     winrt::Windows::UI::Xaml::Hosting::DesktopWindowXamlSource desktopSource;
 
     auto interop = desktopSource.as<IDesktopWindowXamlSourceNative>();
     // Parent the DesktopWindowXamlSource object to current window
-    hr = interop->AttachToWindow(m_hMainWnd.get());
-    winrt::check_hresult(hr);
+    winrt::check_hresult(interop->AttachToWindow(m_hMainWnd.get()));
 
-    // Get the new child window's hwnd 
-    HWND hWndXamlIsland = nullptr;
-    hr = interop->get_WindowHandle(&hWndXamlIsland);
-    winrt::check_hresult(hr);
-    DWORD dwNewStyle = GetWindowLong(hWndXamlIsland, GWL_STYLE);
-    dwNewStyle |= dwStyle;
-    SetWindowLong(hWndXamlIsland, GWL_STYLE, dwNewStyle);
+    // Get the new child window's hwnd
+    wil::unique_hwnd islandWindow;
+    winrt::check_hresult(interop->get_WindowHandle(&islandWindow));
+    const DWORD style = GetWindowLongW(islandWindow.get(), GWL_STYLE) | extraWindowStyles;
+    SetWindowLongW(islandWindow.get(), GWL_STYLE, style);
 
     desktopSource.Content(content);
 
     m_takeFocusEventRevokers.push_back(desktopSource.TakeFocusRequested(winrt::auto_revoke, { this, &DesktopWindow::OnTakeFocusRequested }));
-
     m_xamlSources.push_back(desktopSource);
 
-    return hWndXamlIsland;
+    return islandWindow;
 }
 
 void DesktopWindow::ClearXamlIslands()
@@ -252,7 +241,7 @@ void DesktopWindow::ClearXamlIslands()
     }
     m_takeFocusEventRevokers.clear();
 
-    for (auto xamlSource : m_xamlSources)
+    for (auto& xamlSource : m_xamlSources)
     {
         xamlSource.Close();
     }
@@ -261,18 +250,13 @@ void DesktopWindow::ClearXamlIslands()
 
 winrt::Windows::UI::Xaml::UIElement LoadXamlControl(uint32_t id)
 {
-    auto rc = ::FindResource(nullptr, MAKEINTRESOURCE(id), MAKEINTRESOURCE(XAMLRESOURCE));
-    if (!rc)
-    {
-        winrt::check_hresult(HRESULT_FROM_WIN32(GetLastError()));
-    }
+    auto rc = ::FindResourceW(nullptr, MAKEINTRESOURCE(id), MAKEINTRESOURCE(XAMLRESOURCE));
+    THROW_LAST_ERROR_IF(!rc);
+
     HGLOBAL rcData = ::LoadResource(nullptr, rc);
-    if (!rcData)
-    {
-        winrt::check_hresult(HRESULT_FROM_WIN32(GetLastError()));
-    }
-    auto pData = static_cast<wchar_t*>(::LockResource(rcData));
-    auto content = winrt::Windows::UI::Xaml::Markup::XamlReader::Load(winrt::get_abi(pData));
-    auto uiElement = content.as<winrt::Windows::UI::Xaml::UIElement>();
-    return uiElement;
+    THROW_LAST_ERROR_IF(!rcData);
+
+    auto data = static_cast<wchar_t*>(::LockResource(rcData));
+    auto content = winrt::Windows::UI::Xaml::Markup::XamlReader::Load(winrt::get_abi(data));
+    return content.as<winrt::Windows::UI::Xaml::UIElement>();
 }
