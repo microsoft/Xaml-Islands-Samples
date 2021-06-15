@@ -256,6 +256,6 @@ winrt::Windows::UI::Xaml::UIElement LoadXamlControl(uint32_t id)
     THROW_LAST_ERROR_IF(!rcData);
 
     auto data = static_cast<wchar_t*>(::LockResource(rcData));
-    auto content = winrt::Windows::UI::Xaml::Markup::XamlReader::Load(winrt::get_abi(data));
+    auto content = winrt::Windows::UI::Xaml::Markup::XamlReader::Load(data);
     return content.as<winrt::Windows::UI::Xaml::UIElement>();
 }
