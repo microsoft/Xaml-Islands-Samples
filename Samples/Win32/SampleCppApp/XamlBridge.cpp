@@ -68,11 +68,10 @@ winrt::Windows::UI::Xaml::Hosting::DesktopWindowXamlSource DesktopWindow::GetNex
 
             const auto currentFocusedWindow = ::GetFocus();
             const auto nextElement = ::GetNextDlgTabItem(m_window.get(), currentFocusedWindow, previous);
-            for (auto xamlSource : m_xamlSources)
+            for (auto& xamlSource : m_xamlSources)
             {
-                const auto nativeIsland = xamlSource.as<IDesktopWindowXamlSourceNative>();
-                HWND islandWnd = nullptr;
-                winrt::check_hresult(nativeIsland->get_WindowHandle(&islandWnd));
+                HWND islandWnd{};
+                winrt::check_hresult(xamlSource.as<IDesktopWindowXamlSourceNative>()->get_WindowHandle(&islandWnd));
                 if (nextElement == islandWnd)
                 {
                     return xamlSource;
@@ -105,7 +104,7 @@ bool DesktopWindow::NavigateFocus(MSG* msg)
         RECT rect = {};
         WINRT_VERIFY(::GetWindowRect(previousFocusedWindow, &rect));
         const auto nativeIsland = nextFocusedIsland.as<IDesktopWindowXamlSourceNative>();
-        HWND islandWnd = nullptr;
+        HWND islandWnd{};
         winrt::check_hresult(nativeIsland->get_WindowHandle(&islandWnd));
         POINT pt = { rect.left, rect.top };
         SIZE size = { rect.right - rect.left, rect.bottom - rect.top };
