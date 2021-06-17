@@ -14,7 +14,7 @@ class DesktopWindow
 {
 protected:
     int MessageLoop(HACCEL accelerators);
-    wil::unique_hwnd CreateDesktopWindowsXamlSource(DWORD extraStyles, winrt::Windows::UI::Xaml::UIElement content);
+    HWND CreateDesktopWindowsXamlSource(DWORD extraStyles, const winrt::Windows::UI::Xaml::UIElement& content);
     void ClearXamlIslands();
 
     HWND WindowHandle() const
@@ -59,7 +59,7 @@ protected:
         {
             SetWindowLongPtrW(window, GWLP_USERDATA, 0);
         }
-        else if (T* that = GetThisFromHandle(window))
+        else if (auto that = reinterpret_cast<T*>(GetWindowLongPtrW(window, GWLP_USERDATA)))
         {
             return that->MessageHandler(message, wparam, lparam);
         }
@@ -100,11 +100,6 @@ private:
         {
             SetFocus(m_hwndLastFocus);
         }
-    }
-
-    static T* GetThisFromHandle(HWND window) noexcept
-    {
-        return reinterpret_cast<T*>(GetWindowLongPtrW(window, GWLP_USERDATA));
     }
 
     HWND m_hwndLastFocus = nullptr;

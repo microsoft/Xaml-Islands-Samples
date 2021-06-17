@@ -210,26 +210,24 @@ void DesktopWindow::OnTakeFocusRequested(winrt::Windows::UI::Xaml::Hosting::Desk
     }
 }
 
-wil::unique_hwnd DesktopWindow::CreateDesktopWindowsXamlSource(DWORD extraWindowStyles, winrt::Windows::UI::Xaml::UIElement content)
+HWND DesktopWindow::CreateDesktopWindowsXamlSource(DWORD extraWindowStyles, const winrt::Windows::UI::Xaml::UIElement& content)
 {
     winrt::Windows::UI::Xaml::Hosting::DesktopWindowXamlSource desktopSource;
 
     auto interop = desktopSource.as<IDesktopWindowXamlSourceNative>();
     // Parent the DesktopWindowXamlSource object to current window
     winrt::check_hresult(interop->AttachToWindow(m_window.get()));
-
-    // Get the new child window's hwnd
-    wil::unique_hwnd islandWindow;
-    winrt::check_hresult(interop->get_WindowHandle(&islandWindow));
-    const DWORD style = GetWindowLongW(islandWindow.get(), GWL_STYLE) | extraWindowStyles;
-    SetWindowLongW(islandWindow.get(), GWL_STYLE, style);
+    HWND xamlSourceWindow{}; // Lifetime controlled desktopSource
+    winrt::check_hresult(interop->get_WindowHandle(&xamlSourceWindow));
+    const DWORD style = GetWindowLongW(xamlSourceWindow, GWL_STYLE) | extraWindowStyles;
+    SetWindowLongW(xamlSourceWindow, GWL_STYLE, style);
 
     desktopSource.Content(content);
 
     m_takeFocusEventRevokers.push_back(desktopSource.TakeFocusRequested(winrt::auto_revoke, { this, &DesktopWindow::OnTakeFocusRequested }));
     m_xamlSources.push_back(desktopSource);
 
-    return islandWindow;
+    return xamlSourceWindow;
 }
 
 void DesktopWindow::ClearXamlIslands()

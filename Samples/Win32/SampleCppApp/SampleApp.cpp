@@ -158,9 +158,9 @@ private:
         const auto islandHeight = newHeight - (ButtonHeight * 2) - ButtonMargin;
         const auto islandWidth = newWidth - (ButtonMargin * 2);
         SetWindowPos(m_button1.get(), 0, ButtonWidth * 2, ButtonMargin, ButtonWidth, ButtonHeight, SWP_SHOWWINDOW);
-        SetWindowPos(m_xamlButton1.get(), m_button1.get(), newWidth - (ButtonWidth * 2), ButtonMargin, ButtonWidth, ButtonHeight, SWP_SHOWWINDOW);
-        SetWindowPos(m_xamlIsland.get(), m_xamlButton1.get(), 0, XamlIslandMargin, islandWidth, islandHeight, SWP_SHOWWINDOW);
-        SetWindowPos(m_button2.get(), m_xamlIsland.get(), (ButtonMargin + newWidth - ButtonWidth) / 2, newHeight - ButtonMargin - ButtonHeight, ButtonWidth, ButtonHeight, SWP_SHOWWINDOW);
+        SetWindowPos(m_xamlButton1, m_button1.get(), newWidth - (ButtonWidth * 2), ButtonMargin, ButtonWidth, ButtonHeight, SWP_SHOWWINDOW);
+        SetWindowPos(m_xamlIsland, m_xamlButton1, 0, XamlIslandMargin, islandWidth, islandHeight, SWP_SHOWWINDOW);
+        SetWindowPos(m_button2.get(), m_xamlIsland, (ButtonMargin + newWidth - ButtonWidth) / 2, newHeight - ButtonMargin - ButtonHeight, ButtonWidth, ButtonHeight, SWP_SHOWWINDOW);
     }
 
     void OnXamlButtonClick(winrt::Windows::Foundation::IInspectable const& sender, winrt::Windows::UI::Xaml::RoutedEventArgs const&)
@@ -171,8 +171,8 @@ private:
     const HINSTANCE m_instance;
     wil::unique_hwnd m_button1;
     wil::unique_hwnd m_button2;
-    wil::unique_hwnd m_xamlIsland;
-    wil::unique_hwnd m_xamlButton1;
+    HWND m_xamlIsland{};
+    HWND m_xamlButton1{};
     wil::unique_haccel m_accelerators;
     winrt::MyApp::MainUserControl m_mainUserControl{ nullptr };
     winrt::Windows::UI::Xaml::Controls::Button m_xamlButton{nullptr};
