@@ -12,36 +12,33 @@
 
 class DesktopWindow
 {
-public:
-    int MessageLoop(HACCEL hAccelTable);
+protected:
+    int MessageLoop(HACCEL accelerators);
+    HWND CreateDesktopWindowsXamlSource(DWORD extraStyles, const winrt::Windows::UI::Xaml::UIElement& content);
+    void ClearXamlIslands();
+
+    HWND WindowHandle() const
+    {
+        return m_window.get();
+    }
+
+    static void OnNCCreate(HWND window, LPARAM lparam) noexcept
+    {
+        auto cs = reinterpret_cast<CREATESTRUCT*>(lparam);
+        auto that = static_cast<DesktopWindow*>(cs->lpCreateParams);
+        that->m_window.reset(window); // take ownership of the window
+        SetWindowLongPtrW(window, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(that));
+    }
+
 private:
     winrt::Windows::UI::Xaml::Hosting::DesktopWindowXamlSource GetFocusedIsland();
     bool FilterMessage(const MSG* msg);
     void OnTakeFocusRequested(winrt::Windows::UI::Xaml::Hosting::DesktopWindowXamlSource const& sender, winrt::Windows::UI::Xaml::Hosting::DesktopWindowXamlSourceTakeFocusRequestedEventArgs const& args);
-    winrt::Windows::UI::Xaml::Hosting::DesktopWindowXamlSource GetNextFocusedIsland(MSG* msg);
+    winrt::Windows::UI::Xaml::Hosting::DesktopWindowXamlSource GetNextFocusedIsland(const MSG* msg);
     bool NavigateFocus(MSG* msg);
-protected:
-    HWND CreateDesktopWindowsXamlSource(DWORD dwStyle, winrt::Windows::UI::Xaml::UIElement content);
-    void ClearXamlIslands();
 
-    HWND GetHandle() const
-    {
-        return m_hMainWnd.get();
-    }
-
-    static void OnNCCreate(HWND const window, LPARAM const lparam) noexcept
-    {
-        auto cs = reinterpret_cast<CREATESTRUCT*>(lparam);
-        auto that = static_cast<DesktopWindow*>(cs->lpCreateParams);
-        WINRT_ASSERT(that);
-        WINRT_ASSERT(!that->GetHandle());
-        that->m_hMainWnd = wil::unique_hwnd(window);
-        SetWindowLongPtr(window, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(that));
-    }
-
-private:
-    wil::unique_hwnd m_hMainWnd = nullptr;
-    winrt::guid lastFocusRequestId;
+    wil::unique_hwnd m_window;
+    winrt::guid m_lastFocusRequestId;
     std::vector<winrt::Windows::UI::Xaml::Hosting::DesktopWindowXamlSource::TakeFocusRequested_revoker> m_takeFocusEventRevokers;
     std::vector<winrt::Windows::UI::Xaml::Hosting::DesktopWindowXamlSource> m_xamlSources;
 };
@@ -52,31 +49,33 @@ struct DesktopWindowT : public DesktopWindow
 protected:
     using base_type = DesktopWindowT<T>;
 
-    static LRESULT __stdcall WndProc(HWND const window, UINT const message, WPARAM const wparam, LPARAM const lparam) noexcept
+    static LRESULT __stdcall WndProc(HWND window, UINT message, WPARAM wparam, LPARAM lparam) noexcept
     {
-        WINRT_ASSERT(window);
-
-        if (WM_NCCREATE == message)
+        if (message == WM_NCCREATE)
         {
-            DesktopWindow::OnNCCreate(window, lparam);
+            OnNCCreate(window, lparam);
         }
-        else if (T * that = GetThisFromHandle(window))
+        else if (message == WM_NCDESTROY)
+        {
+            SetWindowLongPtrW(window, GWLP_USERDATA, 0);
+        }
+        else if (auto that = reinterpret_cast<T*>(GetWindowLongPtrW(window, GWLP_USERDATA)))
         {
             return that->MessageHandler(message, wparam, lparam);
         }
 
-        return DefWindowProc(window, message, wparam, lparam);
+        return DefWindowProcW(window, message, wparam, lparam);
     }
 
-    LRESULT MessageHandler(UINT const message, WPARAM const wParam, LPARAM const lParam) noexcept
+    LRESULT MessageHandler(UINT message, WPARAM wParam, LPARAM lParam) noexcept
     {
         switch (message)
         {
-            HANDLE_MSG(GetHandle(), WM_DESTROY, OnDestroy);
-            HANDLE_MSG(GetHandle(), WM_ACTIVATE, OnActivate);
-            HANDLE_MSG(GetHandle(), WM_SETFOCUS, OnSetFocus);
+            HANDLE_MSG(WindowHandle(), WM_DESTROY, OnDestroy);
+            HANDLE_MSG(WindowHandle(), WM_ACTIVATE, OnActivate);
+            HANDLE_MSG(WindowHandle(), WM_SETFOCUS, OnSetFocus);
         }
-        return DefWindowProc(GetHandle(), message, wParam, lParam);
+        return DefWindowProcW(WindowHandle(), message, wParam, lParam);
     }
 
     void OnDestroy(HWND)
@@ -97,14 +96,10 @@ private:
 
     void OnSetFocus(HWND, HWND hwndOldFocus)
     {
-        if (m_hwndLastFocus) {
+        if (m_hwndLastFocus)
+        {
             SetFocus(m_hwndLastFocus);
         }
-    }
-
-    static T* GetThisFromHandle(HWND const window) noexcept
-    {
-        return reinterpret_cast<T*>(GetWindowLongPtr(window, GWLP_USERDATA));
     }
 
     HWND m_hwndLastFocus = nullptr;
@@ -115,6 +110,5 @@ winrt::Windows::UI::Xaml::UIElement LoadXamlControl(uint32_t id);
 template<typename T>
 T LoadXamlControl(uint32_t id)
 {
-    const auto uiElement = LoadXamlControl(id);
-    return uiElement.as<T>();
+    return LoadXamlControl(id).as<T>();
 }
