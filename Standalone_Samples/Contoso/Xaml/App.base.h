@@ -24,12 +24,12 @@ namespace winrt::MyApp::implementation
 
     private:
         bool _contentLoaded{ false };
-        std::shared_ptr<XamlMetaDataProvider> _appProvider;
-        std::shared_ptr<XamlMetaDataProvider> AppProvider()
+        ::winrt::com_ptr<XamlMetaDataProvider> _appProvider;
+        ::winrt::com_ptr<XamlMetaDataProvider> AppProvider()
         {
             if (!_appProvider)
             {
-                _appProvider = std::make_shared<XamlMetaDataProvider>();
+                _appProvider = ::winrt::make_self<XamlMetaDataProvider>();
             }
             return _appProvider;
         }
