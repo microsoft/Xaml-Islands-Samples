@@ -6,7 +6,7 @@ This sample demonstrates how to use UWP XAML and WinUI 2 controls inside of a MF
 
 This project is the MFC MDI app with XamlIsland. It loaded Windows::UI::Controls and WinUI 2 (Windows::UI::Controls) through  a Windows Runtime Component.
 
-It follows the [guide](https://github.com/marb2000/XamlIslands/tree/master/1903_Samples/CppWinRT_Win32_SingleIsland)  to copy xbf, dll, pri files from MyApp and Winows Runtime Components.
+It follows the [guide](https://github.com/marb2000/XamlIslands/tree/master/1903_Samples/CppWinRT_Win32_SingleIsland) to copy xbf, dll, pri files from MyApp and Windows Runtime Components.
 
 ### MyApp (Universal Windows)
 
@@ -33,7 +33,7 @@ To generate a UWP Application, this sample is using the template for a UWP Appli
     </Toolkit:XamlApplication.Resources>
 </Toolkit:XamlApplication>
 ```
-- The build settings have been modified to produced resources.pri and AppxManifest at build time. If your app doesn't have app manifest with the <maxversiontested Id="10.0.18632.0"/>, the build will generate it for you. These MSBuild properties allow you to activate/deactivate this autogeneration. 
+- The build settings have been modified to produced resources.pri and AppxManifest at build time. If your app doesn't have app manifest with the <maxversiontested Id="10.0.18362.0"/>, the build will generate it for you. These MSBuild properties allow you to activate/deactivate this autogeneration. 
 ```xml
   <PropertyGroup Label="Globals">
     <WindowsAppContainer>true</WindowsAppContainer>

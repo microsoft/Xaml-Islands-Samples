@@ -5,24 +5,20 @@
 
 bool DesktopWindow::FilterMessage(const MSG* msg)
 {
-    // When multiple child windows are present it is needed to pre dispatch messages to all 
-    // DesktopWindowXamlSource instances so keyboard accelerators and 
+    // When multiple child windows are present it is needed to pre dispatch messages to all
+    // DesktopWindowXamlSource instances so keyboard accelerators and
     // keyboard focus work correctly.
-    BOOL xamlSourceProcessedMessage = FALSE;
+    for (auto& xamlSource : m_xamlSources)
     {
-        for (auto xamlSource : m_xamlSources)
+        BOOL xamlSourceProcessedMessage = FALSE;
+        winrt::check_hresult(xamlSource.as<IDesktopWindowXamlSourceNative2>()->PreTranslateMessage(msg, &xamlSourceProcessedMessage));
+        if (xamlSourceProcessedMessage != FALSE)
         {
-            auto xamlSourceNative2 = xamlSource.as<IDesktopWindowXamlSourceNative2>();
-            const auto hr = xamlSourceNative2->PreTranslateMessage(msg, &xamlSourceProcessedMessage);
-            winrt::check_hresult(hr);
-            if (xamlSourceProcessedMessage)
-            {
-                break;
-            }
+            return true;
         }
     }
 
-    return !!xamlSourceProcessedMessage;
+    return false;
 }
 
 const auto static invalidReason = static_cast<winrt::Windows::UI::Xaml::Hosting::XamlSourceFocusNavigationReason>(-1);
@@ -57,7 +53,7 @@ winrt::Windows::UI::Xaml::Hosting::XamlSourceFocusNavigationReason GetReasonFrom
     return reason;
 }
 
-winrt::Windows::UI::Xaml::Hosting::DesktopWindowXamlSource DesktopWindow::GetNextFocusedIsland(MSG* msg)
+winrt::Windows::UI::Xaml::Hosting::DesktopWindowXamlSource DesktopWindow::GetNextFocusedIsland(const MSG* msg)
 {
     if (msg->message == WM_KEYDOWN)
     {
@@ -71,12 +67,11 @@ winrt::Windows::UI::Xaml::Hosting::DesktopWindowXamlSource DesktopWindow::GetNex
                     reason == winrt::Windows::UI::Xaml::Hosting::XamlSourceFocusNavigationReason::Right) ? false : true;
 
             const auto currentFocusedWindow = ::GetFocus();
-            const auto nextElement = ::GetNextDlgTabItem(m_hMainWnd.get(), currentFocusedWindow, previous);
-            for (auto xamlSource : m_xamlSources)
+            const auto nextElement = ::GetNextDlgTabItem(m_window.get(), currentFocusedWindow, previous);
+            for (auto& xamlSource : m_xamlSources)
             {
-                const auto nativeIsland = xamlSource.as<IDesktopWindowXamlSourceNative>();
-                HWND islandWnd = nullptr;
-                winrt::check_hresult(nativeIsland->get_WindowHandle(&islandWnd));
+                HWND islandWnd{};
+                winrt::check_hresult(xamlSource.as<IDesktopWindowXamlSourceNative>()->get_WindowHandle(&islandWnd));
                 if (nextElement == islandWnd)
                 {
                     return xamlSource;
@@ -90,7 +85,7 @@ winrt::Windows::UI::Xaml::Hosting::DesktopWindowXamlSource DesktopWindow::GetNex
 
 winrt::Windows::UI::Xaml::Hosting::DesktopWindowXamlSource DesktopWindow::GetFocusedIsland()
 {
-    for (auto xamlSource : m_xamlSources)
+    for (auto& xamlSource : m_xamlSources)
     {
         if (xamlSource.HasFocus())
         {
@@ -109,7 +104,7 @@ bool DesktopWindow::NavigateFocus(MSG* msg)
         RECT rect = {};
         WINRT_VERIFY(::GetWindowRect(previousFocusedWindow, &rect));
         const auto nativeIsland = nextFocusedIsland.as<IDesktopWindowXamlSourceNative>();
-        HWND islandWnd = nullptr;
+        HWND islandWnd{};
         winrt::check_hresult(nativeIsland->get_WindowHandle(&islandWnd));
         POINT pt = { rect.left, rect.top };
         SIZE size = { rect.right - rect.left, rect.bottom - rect.top };
@@ -117,7 +112,7 @@ bool DesktopWindow::NavigateFocus(MSG* msg)
         const auto hintRect = winrt::Windows::Foundation::Rect({ static_cast<float>(pt.x), static_cast<float>(pt.y), static_cast<float>(size.cx), static_cast<float>(size.cy) });
         const auto reason = GetReasonFromKey(msg->wParam);
         const auto request = winrt::Windows::UI::Xaml::Hosting::XamlSourceFocusNavigationRequest(reason, hintRect);
-        lastFocusRequestId = request.CorrelationId();
+        m_lastFocusRequestId = request.CorrelationId();
         const auto result = nextFocusedIsland.NavigateFocus(request);
         return result.WasFocusMoved();
     }
@@ -131,29 +126,28 @@ bool DesktopWindow::NavigateFocus(MSG* msg)
         {
             return false;
         }
-        const bool isDialogMessage = !!IsDialogMessage(m_hMainWnd.get(), msg);
+        const bool isDialogMessage = !!IsDialogMessage(m_window.get(), msg);
         return isDialogMessage;
     }
 }
 
-int DesktopWindow::MessageLoop(HACCEL hAccelTable)
+int DesktopWindow::MessageLoop(HACCEL accelerators)
 {
     MSG msg = {};
-    HRESULT hr = S_OK;
-    while (GetMessage(&msg, nullptr, 0, 0))
+    while (GetMessageW(&msg, nullptr, 0, 0))
     {
-        const bool xamlSourceProcessedMessage = FilterMessage(&msg);
-        if (!xamlSourceProcessedMessage && !TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+        const bool processedMessage = FilterMessage(&msg);
+        if (!processedMessage && !TranslateAcceleratorW(msg.hwnd, accelerators, &msg))
         {
             if (!NavigateFocus(&msg))
             {
                 TranslateMessage(&msg);
-                DispatchMessage(&msg);
+                DispatchMessageW(&msg);
             }
         }
     }
 
-    return (int)msg.wParam;
+    return static_cast<int>(msg.wParam);
 }
 
 static const WPARAM invalidKey = (WPARAM)-1;
@@ -186,7 +180,7 @@ WPARAM GetKeyFromReason(winrt::Windows::UI::Xaml::Hosting::XamlSourceFocusNaviga
 
 void DesktopWindow::OnTakeFocusRequested(winrt::Windows::UI::Xaml::Hosting::DesktopWindowXamlSource const& sender, winrt::Windows::UI::Xaml::Hosting::DesktopWindowXamlSourceTakeFocusRequestedEventArgs const& args)
 {
-    if (args.Request().CorrelationId() != lastFocusRequestId)
+    if (args.Request().CorrelationId() != m_lastFocusRequestId)
     {
         const auto reason = args.Request().Reason();
         const BOOL previous =
@@ -204,44 +198,36 @@ void DesktopWindow::OnTakeFocusRequested(winrt::Windows::UI::Xaml::Hosting::Desk
         msg.wParam = GetKeyFromReason(reason);
         if (!NavigateFocus(&msg))
         {
-            const auto nextElement = ::GetNextDlgTabItem(m_hMainWnd.get(), senderHwnd, previous);
+            const auto nextElement = ::GetNextDlgTabItem(m_window.get(), senderHwnd, previous);
             ::SetFocus(nextElement);
         }
     }
     else
     {
         const auto request = winrt::Windows::UI::Xaml::Hosting::XamlSourceFocusNavigationRequest(winrt::Windows::UI::Xaml::Hosting::XamlSourceFocusNavigationReason::Restore);
-        lastFocusRequestId = request.CorrelationId();
+        m_lastFocusRequestId = request.CorrelationId();
         sender.NavigateFocus(request);
     }
 }
 
-HWND DesktopWindow::CreateDesktopWindowsXamlSource(DWORD dwStyle, winrt::Windows::UI::Xaml::UIElement content)
+HWND DesktopWindow::CreateDesktopWindowsXamlSource(DWORD extraWindowStyles, const winrt::Windows::UI::Xaml::UIElement& content)
 {
-    HRESULT hr = S_OK;
-
     winrt::Windows::UI::Xaml::Hosting::DesktopWindowXamlSource desktopSource;
 
     auto interop = desktopSource.as<IDesktopWindowXamlSourceNative>();
     // Parent the DesktopWindowXamlSource object to current window
-    hr = interop->AttachToWindow(m_hMainWnd.get());
-    winrt::check_hresult(hr);
-
-    // Get the new child window's hwnd 
-    HWND hWndXamlIsland = nullptr;
-    hr = interop->get_WindowHandle(&hWndXamlIsland);
-    winrt::check_hresult(hr);
-    DWORD dwNewStyle = GetWindowLong(hWndXamlIsland, GWL_STYLE);
-    dwNewStyle |= dwStyle;
-    SetWindowLong(hWndXamlIsland, GWL_STYLE, dwNewStyle);
+    winrt::check_hresult(interop->AttachToWindow(m_window.get()));
+    HWND xamlSourceWindow{}; // Lifetime controlled desktopSource
+    winrt::check_hresult(interop->get_WindowHandle(&xamlSourceWindow));
+    const DWORD style = GetWindowLongW(xamlSourceWindow, GWL_STYLE) | extraWindowStyles;
+    SetWindowLongW(xamlSourceWindow, GWL_STYLE, style);
 
     desktopSource.Content(content);
 
     m_takeFocusEventRevokers.push_back(desktopSource.TakeFocusRequested(winrt::auto_revoke, { this, &DesktopWindow::OnTakeFocusRequested }));
-
     m_xamlSources.push_back(desktopSource);
 
-    return hWndXamlIsland;
+    return xamlSourceWindow;
 }
 
 void DesktopWindow::ClearXamlIslands()
@@ -252,7 +238,7 @@ void DesktopWindow::ClearXamlIslands()
     }
     m_takeFocusEventRevokers.clear();
 
-    for (auto xamlSource : m_xamlSources)
+    for (auto& xamlSource : m_xamlSources)
     {
         xamlSource.Close();
     }
@@ -261,18 +247,13 @@ void DesktopWindow::ClearXamlIslands()
 
 winrt::Windows::UI::Xaml::UIElement LoadXamlControl(uint32_t id)
 {
-    auto rc = ::FindResource(nullptr, MAKEINTRESOURCE(id), MAKEINTRESOURCE(XAMLRESOURCE));
-    if (!rc)
-    {
-        winrt::check_hresult(HRESULT_FROM_WIN32(GetLastError()));
-    }
+    auto rc = ::FindResourceW(nullptr, MAKEINTRESOURCE(id), MAKEINTRESOURCE(XAMLRESOURCE));
+    THROW_LAST_ERROR_IF(!rc);
+
     HGLOBAL rcData = ::LoadResource(nullptr, rc);
-    if (!rcData)
-    {
-        winrt::check_hresult(HRESULT_FROM_WIN32(GetLastError()));
-    }
-    auto pData = static_cast<wchar_t*>(::LockResource(rcData));
-    auto content = winrt::Windows::UI::Xaml::Markup::XamlReader::Load(winrt::get_abi(pData));
-    auto uiElement = content.as<winrt::Windows::UI::Xaml::UIElement>();
-    return uiElement;
+    THROW_LAST_ERROR_IF(!rcData);
+
+    auto data = static_cast<wchar_t*>(::LockResource(rcData));
+    auto content = winrt::Windows::UI::Xaml::Markup::XamlReader::Load(data);
+    return content.as<winrt::Windows::UI::Xaml::UIElement>();
 }
