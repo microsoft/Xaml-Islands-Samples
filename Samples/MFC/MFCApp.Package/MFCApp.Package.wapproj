@@ -54,16 +54,15 @@
     <TargetPlatformVersion>10.0.18362.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.18362.0</TargetPlatformMinVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
-    <AppxPackageSigningEnabled>False</AppxPackageSigningEnabled>
+    <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
     <EntryPointProjectUniqueName>..\MFCApp\MFCApp.vcxproj</EntryPointProjectUniqueName>
-    <GenerateAppInstallerFile>True</GenerateAppInstallerFile>
+    <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <AppxBundlePlatforms>x64</AppxBundlePlatforms>
     <AppInstallerUri>https://xamlislandspoc.z6.web.core.windows.net/</AppInstallerUri>
-    <PackageCertificateThumbprint>D4128F8DCD2CE180E35775C20E264C7C5E442D05</PackageCertificateThumbprint>
-    <PackageCertificateKeyFile>F:\Repos\Xaml-Islands-Samples\Samples\MFC\MFCApp.Package\MFCApp.Package_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>MFCApp.Package_TemporaryKey.pfx</PackageCertificateKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <AppxBundle>Never</AppxBundle>
