@@ -11,7 +11,11 @@
         <ResourceDictionary Source="ms-appx:///Microsoft.UI.Xaml/DensityStyles/Compact.xaml" />
     </UserControl.Resources>
     <Grid>
-        <muxc:TreeView ItemInvoked="TreeView_ItemInvoked" ItemsSource="{x:Bind Nodes}" ScrollViewer.HorizontalScrollMode="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <muxc:TreeView Grid.Column="1" SelectionMode="Multiple" ItemInvoked="TreeView_ItemInvoked" ItemsSource="{x:Bind Nodes}" ScrollViewer.HorizontalScrollMode="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto">
             <muxc:TreeView.ItemTemplate>
                 <DataTemplate x:DataType="local:TreeViewNodeViewModel">
                     <muxc:TreeViewItem ItemsSource="{x:Bind Children}">
